@@ -1,8 +1,10 @@
-const prompt = ([msg = '', num = 20]) => {
+const prompt = (msg = '', num = 20) => {
+  //console.log(msg);
+  //console.log(num);
   console.log(`${'*'.repeat(num)}${msg}${'*'.repeat(num)}`);
 }
 
-prompt(['函数默认值']);
+prompt('函数默认值');
 {
   function foo(x, y = 'world') {
     console.log(`${x}, ${y}`);
@@ -12,7 +14,7 @@ prompt(['函数默认值']);
 }
 
 
-prompt(['对象解析赋值和默认值对应使用']);
+prompt('对象解析赋值和默认值对应使用');
 {
   // function foo({x = [对象解析赋值的默认值], y = [对象解析赋值的默认值]} = [默认值])
   // 设置了对象解析赋值的默认值, 但是默认值是一个空对象
@@ -31,7 +33,7 @@ prompt(['对象解析赋值和默认值对应使用']);
   foo2({x : 3}); // 3, undefined
 }
 
-prompt(['length 属性']);
+prompt('length 属性');
 {
   console.log(((x, y = 1) => {}).length); // 1
   console.log(((x, y, z = 1) => {}).length); // 2
@@ -43,7 +45,7 @@ prompt(['length 属性']);
   console.log((function(a, ...b) {}).length);  // 1
 }
 
-prompt(['作用域']);
+prompt('作用域');
 {
   let s = 'outer';
   function foo(func = () => s) {
@@ -53,7 +55,7 @@ prompt(['作用域']);
   foo();
 }
 
-prompt(['rest 参数']);
+prompt('rest 参数');
 {
   function sum(...args) {
     let sum = 0;
@@ -68,7 +70,7 @@ prompt(['rest 参数']);
   console.log(sum.name);
 }
 
-prompt(['箭头函数']);
+prompt('箭头函数');
 {
   let foo1 = (a, b) => a + b;
   console.log((foo1(1, 2)));
@@ -77,4 +79,39 @@ prompt(['箭头函数']);
   // 使用箭头函数简化回调函数的写法.
   let tArr = [1, 2, 3].map(x => x * x);
   console.log(tArr.join(',')); //[1, 4, 9]
+}
+
+
+prompt('函数作用域');
+{
+    let foo = 'outer';
+    function bar(func = () => foo) {
+      let foo = 'bar';
+      console.log(func()); // outer, 因为此时 foo 指向为函数外部定义的 foo 变量.
+    }
+    bar();
+    // 下面是一个比较复杂的例子
+}
+
+prompt('应用');
+{
+  function throwIfMissing() {
+    throw new Error('Missing parameter');
+  }
+  function foo(mustParameter = throwIfMissing()) {
+    console.log(mustParameter);
+  }
+  foo(1);
+  //foo();
+}
+
+prompt('2. 项数组中插入数字');
+{
+    function appendValsToArr(arr, ...nums) {
+      nums.forEach(num => arr.push(num));
+    }
+    let arr = [1, 2, 3];
+    console.log(arr.join(','));
+    appendValsToArr(arr, 4, 5, 6);
+    console.log(arr.join(','));
 }
