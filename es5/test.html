@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>级联测试</title>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script type="text/javascript" src="./test.js"></script>
+  </head>
+  <body>
+      <select class="s1"></select>
+      <select class="s2"></select>
+  </body>
+</html>
+
+<script type="text/javascript">
+  $(function() {
+      FormUtil.addCascade2Select({
+          selectors : [".s1", ".s2"],
+          defaults : [""]
+          data : {
+            yunnan : {
+               text : "云南",
+               vals : {
+                 kunming : "昆明",
+                 zhaotong : "昭通"
+               }
+            },
+            sichuan : {
+                text : "四川",
+                vals : {
+                  chengdu : "成都",
+                  chongqing : "重庆"
+                }
+            },
+            zhejiang : {
+              text : "浙江",
+              vals : {
+                hangzhou : "杭州",
+                ningbo : "宁波"
+              }
+            }
+          }
+      });
+  });
+</script>
