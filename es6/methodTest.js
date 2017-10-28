@@ -93,7 +93,64 @@ prompt('函数作用域');
     // 下面是一个比较复杂的例子
 }
 
-prompt('应用');
+prompt('箭头函数需要注意的问题');
+// 了解一下
+prompt('嵌套的箭头函数');
+{
+    // ES5
+    // function insert(val) {
+    //     return {
+    //       into : function(arr) {
+    //         return {
+    //           after : function(afterVal) {
+    //             arr.splice(arr.indexOf(afterVal) + 1, 0, val);
+    //             return arr;
+    //           }
+    //         }
+    //       }
+    //     }
+    // }
+
+    // ES6
+    let insert = val => ({
+      into : arr => ({
+          after : afterVal => {
+            arr.splice(arr.indexOf(afterVal) + 1, 0, val);
+            return arr;
+        }
+      })
+    });
+    console.log(insert(2).into([1, 3]).after(1).join(','));
+}
+
+prompt('双冒号运算法');
+// 提案, 了解一下
+prompt('尾调用优化');
+// 了解一下.
+prompt('尾递归');
+{
+    // 使用递归实现阶乘, 递归实现, 但是是非为递归, 递归的层次太大的话会出现 StackOverflow 的错误.
+    // function factorial(n) {
+    //   if(n == 1) return 1;
+    //   return n * factorial(n - 1);
+    // }
+    // console.log(factorial(10000)); // 出错, 栈溢出
+
+    // 下面的方式是尾递归的实现, 因为递归函数的的调用都是函数的最后一行, 而且最后一次调用之后后面没有其他的操作,
+    // 所以如下的递归调用无论递归多少层函数调用栈中的调用帧都只有一个, 所以不会出现栈溢出的情况.
+    // 前提是该语言的运行环境已经实现了尾调用优化机制, ES6 必须在严格模式下才生效.
+    function factorial(n, total) {
+      'use strict'
+      if( n === 1) return total;
+      return factorial(n - 1, n * total);
+    }
+    // console.log(factorial(10000, 1));
+}
+
+
+prompt('应用', 40);
+
+prompt('1. 维数组设置必须要传递的参数');
 {
   function throwIfMissing() {
     throw new Error('Missing parameter');
@@ -115,3 +172,25 @@ prompt('2. 项数组中插入数字');
     appendValsToArr(arr, 4, 5, 6);
     console.log(arr.join(','));
 }
+
+prompt('严格模式');
+{
+    // 当函数中使用严格模式的时候需要注意哪些问题, 具体请参看 http://es6.ruanyifeng.com/#docs/function, 讲得很详细
+    // 这里只做了解.
+    // function doSomtings(a,  b = a) {
+    //     'use strict'
+    // }
+
+    function strictFunc() {
+      'use strict'
+      // 严格模式下不允许下面方法的使用.
+      // strictFunc.caller;
+      // strictFunc.arguments;
+    }
+    strictFunc();
+}
+
+// 了解
+prompt('尾递归的实现');
+prompt('尾逗号');
+prompt('try~catch');
