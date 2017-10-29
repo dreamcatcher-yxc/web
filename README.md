@@ -1,2 +1,1 @@
-# web
-about webpack
+# ES6 学习测试工程
