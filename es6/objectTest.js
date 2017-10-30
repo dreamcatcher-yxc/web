@@ -72,7 +72,31 @@ prompt('Object.is 判断两个对象是否相等, 和 === 运算符的使用基�
   console.log(Object.is(+0, -0)); // true
 }
 
+prompt('getter、setter 方法');
+{
+  const cart = {
+    _wheels: 4,
+
+    get wheels () {
+        return this._wheels;
+    },
+
+    set wheels (value) {
+       if (value < this._wheels) {
+         throw new Error('数值太小了！');
+       }
+       this._wheels = value;
+    }
+  };
+  console.log(cart.wheels);
+  //cart.wheels = 3; // 报错
+}
+
+// Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
 prompt('Object.assign');
 {
-  
+  let t = {a : 1, b : 2};
+  let s = {b : 3, c : 4};
+  Object.assign(t, s);
+  console.log(t);
 }
