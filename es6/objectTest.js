@@ -147,5 +147,48 @@ prompt('5. 为对象制定默认值');
 
 prompt('对象的可枚举性与遍历');
 {
-  
+    let obj = { foo: 123 };
+    var opd = Object.getOwnPropertyDescriptor(obj, 'foo');
+    console.log(opd);
+    for(k in opd) {
+         console.log(k + ", " + opd[k]);
+    }
+
+    console.log(Object.getOwnPropertyDescriptor(Object.prototype, 'toString').enumerable); // false
+    console.log(Object.getOwnPropertyDescriptor([], 'length').enumerable); // false
+    console.log(Object.getOwnPropertyDescriptor(class {foo(){}}.prototype, 'foo').enumerable); // false
+
+    // Object.getOwnPropertyDescriptors();
+    var opds = Object.getOwnPropertyDescriptors(obj);
+    for(let k in opds) {
+        console.log('key: ' + k);
+        console.log('val: ');
+        for(let tk in opds[k]) {
+            console.log(`${tk} -> ${opds[k][tk]}`);
+        }
+    }
+}
+
+prompt('Object.__proto__, Object.setPrototypeOf(), Object.getPrototypeOf()');
+{
+    let proto = {};
+    let obj = {a : 1};
+    Object.setPrototypeOf(obj, proto);
+    proto.b = 2;
+    proto.c = 3;
+    for(let key in obj) {
+        console.log(`${key} -> ${obj[key]}`);
+    }
+    // Object.getPrototypeOf()
+    console.log(Object.getPrototypeOf(1) == Number.prototype); // true
+    console.log(Object.getPrototypeOf('1') == String.prototype); // true
+    console.log(Object.getPrototypeOf(true) == Boolean.prototype); // true
+    //Object.getPrototypeOf(null); //
+}
+
+prompt('super 关键字');
+{
+    let proto = {a : 2, superFoo() {console.log(this.a)}};
+    // 扩展运算符可以去除对象所有可以遍历的属性
+    console.log({...obj}); // {a: 1, b: 2, c: 3};
 }

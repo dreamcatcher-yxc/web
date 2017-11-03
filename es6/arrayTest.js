@@ -1,7 +1,3 @@
-const prompt = (msg = '', num = 20) => {
-  console.log(`${'*'.repeat(num)}${msg}${'*'.repeat(num)}`);
-}
-
 prompt('(...) 扩展运算符');
 {
   console.log(...[1, 2, 3]); // 1, 2, 3
