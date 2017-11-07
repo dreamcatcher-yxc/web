@@ -58,6 +58,6 @@
 // 具体细节请参看阮雪峰的ES6教程.
 Promise.resolve().then(() => console.log('hello world!'));
 
-//
+
 
 

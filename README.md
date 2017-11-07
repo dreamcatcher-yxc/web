@@ -8,7 +8,7 @@
 
 2. Object.getOwnPropertyDescriptors(Object)： 获取对象的的所有属性描述。
     - Object.setPrototypeOf(): 设置一个对象的 prototype 对象.
-    - Object.getPrototypeOf(): 获取一个对象的 pritotype 对象.
+    - Object.getPrototypeOf(): 获取一个对象的 prototype 对象.
 
 3. super 关键字
     - super.[propertyName]: 相当于 Object.getPrototypeOf(this).[propertyName].
