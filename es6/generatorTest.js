@@ -183,5 +183,26 @@ prompt('Generator 的 this 对象');
 
 prompt('实例: 使用 Generator 逐行读取文件');
 {
-    
+    // function* readFile(path) {
+    //     let file = new FileReader(path);
+    //     try{
+    //         while (!file.eof) {
+    //             yield file.readLine();
+    //         }
+    //     }finally {
+    //         file.close();
+    //     }
+    // }
+    // let lines = readFile('./file/test.txt');
+    // for (let line of lines) {
+    //     console.log(line);
+    // }
 }
+
+// 需要知道 Generator 是 ES6 对于协程的实现, 但是实现了一部分, 因此 Generator 被称为 "半协程",
+// 关于 什么是协程? 协程和普通程序有什么区别? 可以参看 阮雪峰的ES6教程
+// Generator 函数的应用:
+// 1. 异部操作的同步化表示
+// 2. 控制流管理
+// 3. 部署 Iterator 接口
+// 4. 作为数据结构使用
