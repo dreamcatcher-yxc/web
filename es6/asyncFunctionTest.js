@@ -14,6 +14,7 @@ const readFile = (fileName) => {
 const prompt = (msg = '', num = 20) => {
     console.log(`${'*'.repeat(num)}${msg}${'*'.repeat(num)}`);
 }
+
 prompt('使用异步执行函数读取多个文件');
 {
     // const asyncReadFile = async function() {
@@ -78,19 +79,38 @@ prompt('async 方法返回的是一个 promise 对象');
     // logInOrder([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     // 使用异步函数改写上面的代码.
-    async function logInOrder2(randArr) {
-        const resultArr = randArr.map(async rand => {
-            let p = new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve(`${rand} ** ${rand} = ${rand ** rand}`);
-                }, 1000);
-            }).then(console.log);
-            return p;
-        });
-        for (let result of resultArr) {
-            console.log(result);
-        }
-    }
-    logInOrder2([4, 5, 6]);
+    // async function logInOrder2(randArr) {
+    //     const resultArr = randArr.map(async rand => {
+    //         let p = new Promise((resolve, reject) => {
+    //             setTimeout(() => {
+    //                 resolve(`${rand} ** ${rand} = ${rand ** rand}`);
+    //             }, 1000);
+    //         }).then(console.log);
+    //         return p;
+    //     });
+    //     for (let result of resultArr) {
+    //         console.log(result);
+    //     }
+    // }
+    // logInOrder2([4, 5, 6]);
 }
+
+prompt('异步遍历的接口、for await...of');
+{
+    // 目前只是一个提案, 参看 阮一峰ES6教程
+    // for await...of 是针对异步遍历接口的一个循环结构.
+}
+
+prompt('异步 Generator 函数');
+{
+    // node 8.6.0 环境不支持
+    // async function* gen() {
+    //     yield 'hello';
+    // }
+    // gen.next().then(console.log);
+    // 参看 阮一峰ES6教程, 不想看了, 以后会用到的时候再来具体研究吧~~~
+}
+
+
+
 
