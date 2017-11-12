@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--单个插槽-->
+        <parent-component></parent-component>
+        <hr>
+        <!--具名插槽-->
+        <app-layout>
+            <h1 slot="header">这里可能是一个页面标题</h1>
+            <p>主要内容的一个段落。</p>
+            <p>另一个主要段落。</p>
+            <!--
+                这里相当于将 app-layout 中的所有 slot 中的属性值都附在 props 对象上, 除开 slot 的 name 属性.
+            -->
+            <template slot-scope="props">
+                <p>{{props}}</p>
+            </template>
+            <p slot="footer">这里有一些联系信息</p>
+        </app-layout>
+    </div>
+</body>
+</html>
+
+<script type="text/x-template" id="parent-component">
+    <div>
+        <child-component>这是标题</child-component>
+    </div>
+</script>
+<script type="text/x-template" id="child-component">
+    <h1>
+        <slot>默认标题</slot>
+    </h1>
+</script>
+<script type="text/x-template" id="app-layout">
+    <div class="container">
+        <header>
+            <slot name="header"></slot>
+        </header>
+        <main>
+            <slot names="['header', 'footer']"></slot>
+        </main>
+        <footer>
+            <slot name="footer"></slot>
+        </footer>
+    </div>
+</script>
+
+<script type="text/javascript">
+    Vue.component('parent-component', {
+        template : '#parent-component'
+    });
+    Vue.component('child-component', {
+        template : '#child-component'
+    });
+    Vue.component('app-layout', {
+        template : '#app-layout'
+    });
+    new Vue({
+        el : "#app",
+    })
+</script>

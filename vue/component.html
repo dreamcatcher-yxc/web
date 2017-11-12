@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件测试</title>
+    <script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        内容: <input type="text" v-model="content">
+        <child :message="content" @clear="clear"></child>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    Vue.component('child', {
+        props: ['message'],
+        template: '<span @click="clearParentMsg()">{{ message }}</span>',
+        methods : {
+            clearParentMsg : function() {
+                this.$emit('clear', this.message.split('').reverse().join(''));
+            }
+        }
+    });
+    new Vue({
+        el : '#app',
+        data : {
+            content : ''
+        },
+        methods : {
+            clear : function(data) {
+                console.log('data: ' + data);
+                this.content = '';
+            }
+        }
+    })
+</script>

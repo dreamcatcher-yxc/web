@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取子组件的引用</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--设置子组件的引用-->
+        <child ref="childRefs"></child>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    Vue.component('child', {
+        template : '<span>我是子组件</span>'
+    });
+    var parent = new Vue({
+        el : '#app'
+    });
+    /*通过父组件获取子组件的引用*/
+    var child = parent.$refs.childRefs;
+    console.log(child);
+</script>

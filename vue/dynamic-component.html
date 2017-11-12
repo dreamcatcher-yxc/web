@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件测试</title>
+    <script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="count = --count <= 0 ? 3 : count">click me</button>
+        <component :is="'my-h' + (count % 3 + 1)" content="标题"></component>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var h1 = {
+        props : ['content'],
+        template : '<h1 v-text="content"></h1>'
+    };
+    var h2 = {
+        props : ['content'],
+        template : '<h2 v-text="content"></h2>'
+    };
+    var h3 = {
+        props : ['content'],
+        template : '<h3 v-text="content"></h3>'
+    };
+    new Vue({
+        el : '#app',
+        data : {
+            count : 1
+        },
+        components : {
+            myH1 : h1,
+            myH2 : h2,
+            myH3 : h3
+        }
+    });
+</script>
