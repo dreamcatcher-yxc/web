@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span v-html="prompt"></span>
+        TEXT: <input type="text" v-focus>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+   // 注册一个全局自定义指令.
+   var data = {
+       prompt : ''
+   }
+    Vue.directive('focus', {
+        inserted : function(el, binding, vnode) {
+            // 聚焦元素
+            console.log('聚焦事件被触发!');
+            el.focus();
+            var s = JSON.stringify;
+            var text =
+                'name: '       + s(binding.name) + '<br/>' +
+                'value: '      + s(binding.value) + '<br>' +
+                'expression: ' + s(binding.expression) + '<br>' +
+                'argument: '   + s(binding.arg) + '<br>' +
+                'modifiers: '  + s(binding.modifiers) + '<br>' +
+                'vnode keys: ' + Object.keys(vnode).join(', ');
+            data.prompt = text;
+        }
+    });
+    var VM = new Vue({
+        el : '#app',
+        data : data
+    });
+</script>

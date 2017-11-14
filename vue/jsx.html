@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>虚拟节点示例</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <anchored-heading level="1">
+            <slot>这是默认内容</slot>
+        </anchored-heading>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var getChildrenTextContent = function (children) {
+        return children.map(function (node) {
+            return node.children
+                ? getChildrenTextContent(node.children)
+                : node.text
+        }).join('')
+    }
+
+    Vue.component('anchored-heading', {
+        render: function (createElement) {
+            // create kebabCase id
+            var headingId = getChildrenTextContent(this.$slots.default)
+                .toLowerCase()
+                .replace(/\W+/g, '-')
+                .replace(/(^\-|\-$)/g, '')
+            return createElement(
+                'h' + this.level,
+                [
+                    createElement('a', {
+                        attrs: {
+                            name: headingId,
+                            href: '#' + headingId
+                        }
+                    }, this.$slots.default)
+                ]
+            )
+        },
+        props: {
+            level: {
+                type: Number,
+                required: true
+            }
+        }
+    });
+
+    new Vue({
+        el : '#app'
+    });
+</script>

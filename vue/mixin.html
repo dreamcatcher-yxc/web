@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>混合</title>
+    <script type="text/javascript" src="./vue.min.js"></script>
+</head>
+<body>
+</body>
+</html>
+
+<script type="text/javascript">
+    /**
+     * 1. 同名钩子函数将混合为一个数组，因此都将被调用。另外，混合对象的 钩子将在组件自身钩子 之前 调用.
+     *
+     */
+    var myMixin = {
+      created : function() {
+          this.hello();
+      },
+      methods : {
+          hello : function() {
+              console.log('混合对象的钩子被调用');
+          }
+      }
+    };
+    var Component = Vue.extend({
+        mixins : [myMixin],
+        created : function() {
+            console.log('组件的钩子函数被调用');
+        }
+    });
+    var component = new Component();
+</script>

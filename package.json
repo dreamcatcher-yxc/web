@@ -4,7 +4,7 @@
   "description": "webpack test",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "webpack --progress --display-modules --display-reasons --colors"
+    "test": "webpack --config config.js --progress --display-modules --display-reasons --colors"
   },
   "keywords": [
     "webpack",
@@ -19,6 +19,7 @@
     "compression-webpack-plugin": "^1.0.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.1",
+    "html-webpack-plugin": "^2.30.1",
     "style-loader": "^0.19.0",
     "webpack": "^3.8.0",
     "webpack-dev-server": "^2.9.2"
