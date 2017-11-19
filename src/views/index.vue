@@ -1,19 +1,22 @@
-<template>
-    <div class="example">{{ msg }}</div>
+<template scope>
+    <h3>{{ msg }}</h3>
 </template>
 
 <script>
     export default {
         data () {
             return {
-                msg: 'Hello world1!'
+                msg: this.$route.params.msg
+            }
+        },
+        watch : {
+            $route(to, from) {
+                this.msg = to.params.msg;
             }
         }
     }
 </script>
 
-<style>
-    .example {
-        color: red;
-    }
+<style scoped>
+
 </style>
