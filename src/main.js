@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import RouterConfig from './router';
 import App from './app.vue';
 import Vuex from 'vuex';
+// import 'ztree';
+import 'ztree/css/zTreeStyle/zTreeStyle.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 Vue.use(VueRouter); // 路由

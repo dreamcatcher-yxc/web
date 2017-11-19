@@ -2,11 +2,15 @@ const routes = [
     {
         path: '/index/:msg',
         customPath : ['/index/this-is-index1.vue', '/index/this-is-index2.vue'],
-        component:  resolve => require(['./views/index.vue'], resolve)
+        component : resolve => require(['./views/index.vue'], resolve)
     },
     {
         path: '/home2',
         component:  { template: '<div>home2</div>' }
+    },
+    {
+        path : '/menu',
+        component : resolve => require(['./views/outlook_menu_style.vue'], resolve)
     }
 ];
 

@@ -10,7 +10,7 @@ const config = {
   devtool : 'eval-source-map',
   entry: {
     'main' : `${metaData.SRC}/main.js`,
-    'vendor' : ['jquery', 'bootstrap'],
+    'vendor' : ['jquery', 'bootstrap', 'ztree'],
   },
   output: {
     path : metaData.DIST,
@@ -21,6 +21,7 @@ const config = {
     rules: [
         // { test: /\.css$/, loader: 'style-loader!css-loader'},
         { test: /\.css$/, loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader"})},
+        {test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=1024'},
         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
         { test: /\.(woff|woff2)$/, loader:"url-loader?prefix=font/&limit=5000" },
         { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
