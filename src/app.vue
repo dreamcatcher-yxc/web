@@ -2,17 +2,22 @@
     @import 'styles/common.css';
 </style>
 <template>
-    <div id="app">
-        <p>
-            <router-link v-for="path in paths" to="/">index</router-link>
-        </p>
+    <span>
+        <ul>
+            <li v-for="path in paths" >
+                <router-link :to="path"> {{ path }} </router-link>
+            </li>
+        </ul>
+        <hr>
         <router-view></router-view>
-    </div>
+    </span>
 </template>
 <script>
     export default {
         data () {
-            return {}
+            return {
+                paths : this.$store.state.paths
+            }
         },
         mounted () {
 

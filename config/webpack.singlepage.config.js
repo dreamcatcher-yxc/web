@@ -17,38 +17,21 @@ const config = {
   module: {
     // 配置匹配规则
     rules: [
-          {
-            test: /\.css$/,
-            /**
-             *  Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
-             *  加载程序可以通过传递多个加载程序来进行链接，这将从右向左应用（最后一次配置到第一个）。
-             * */
-            use: [
-              { loader: 'styles-loader' },
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: true
-                }
-              }
-            ]
-          },
-          {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: "babel-loader"
-          },
-          {
-              test: /\.vue$/,
-              loader: 'vue-loader'
-          }
+        { test: /\.css$/, loader: 'style-loader!css-loader'},
+        { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
+        { test: /\.(woff|woff2)$/, loader:"url-loader?prefix=font/&limit=5000" },
+        { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+        { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
+        {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+        {test: /\.vue$/, loader: 'vue-loader'}
     ],
     // 配置 loaders
     loaders : [
-      {
-          test : /\.js$/,
-          loader : 'babel'
-      }
+        { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader') },
+        { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file" },
+        { test: /\.(woff|woff2)$/, loader:"url?prefix=font/&limit=5000" },
+        { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream" },
+        { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml" }
     ]
   },
   // 配置插件
@@ -61,7 +44,8 @@ const config = {
   ],
     resolve: {
         alias: {
-            'vue': 'vue/dist/vue.js'
+            'vue': 'vue/dist/vue.js',
+            'bootstrap-css' : 'src/assets/bootstrap/css/bootstrap.min.css'
         }
     },
 };
