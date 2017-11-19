@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>index.html</title>
-    <script type="text/javascript" src="./dist/js/importTest.js"></script>
 </head>
 <body>
-
+<div id="app">
+    <ul>
+        <li v-for="path in paths">
+            <router-link :to="path">{{path}}</router-link>
+        </li>
+    </ul>
+    <hr>
+    <router-view class="view"></router-view>
+</div>
 </body>
 </html>

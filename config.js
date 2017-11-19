@@ -1,2 +1,2 @@
-var webPackConfig = require('./config/webpack.config');
+var webPackConfig = require('./config/webpack.singlepage.config');
 module.exports = webPackConfig;

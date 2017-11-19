@@ -1,16 +1,16 @@
-const path = require('path');
+const metaData = require("../meta_data");
 const fs = require('fs');
+const path = require('path');
 const rp = (tp) => path.resolve(__dirname, `../${tp}`);
 const default_encoding = 'UTF-8';
-const [root, source_path, dist_path]= [path.resolve(__dirname, '../'), rp('src/pages'), rp('dist/pages')];
-
+const [ROOT, SOURCE_PATH, DIST_PATH]= [metaData.ROOT, metaData.HTML_SRC_ROOT, metaData.HTML_DIST_ROOT];
 
 function genMap(fullPath) {
-    let template = fullPath.replace(root, '');
+    let template = fullPath.replace(ROOT, '');
     template = template.substring(1, template.length)
-    let filename = path.join('pages', fullPath.replace(source_path, ''));
-    console.log(`template: ${template}`);
-    console.log(`filename: ${filename}`);
+    let filename = path.join('pages', fullPath.replace(SOURCE_PATH, ''));
+    //console.log(`template: ${template}`);
+    //console.log(`filename: ${filename}`);
     return {template, filename};
 }
 
@@ -36,10 +36,10 @@ function generateDirMap(filePath, mapArr){
 }
 
 const mapArr = [];
-generateDirMap(source_path, mapArr);
-for (let obj of mapArr) {
-    console.log(obj);
-}
+generateDirMap(SOURCE_PATH, mapArr);
+// for (let obj of mapArr) {
+//     console.log(obj);
+// }
 
 module.exports = {
     fileMapArr : mapArr
