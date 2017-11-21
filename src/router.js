@@ -1,5 +1,10 @@
 const routes = [
     {
+        path : '/',
+        redirect : '/menu',
+        component : resolve => require(['./views/index.vue'], resolve)
+    },
+    {
         path: '/index/:msg',
         customPath : ['/index/this-is-index1.vue', '/index/this-is-index2.vue'],
         component : resolve => require(['./views/index.vue'], resolve)
@@ -10,7 +15,13 @@ const routes = [
     },
     {
         path : '/menu',
-        component : resolve => require(['./views/outlook_menu_style.vue'], resolve)
+        components : {
+            "left-menu" : resolve => require(['./views/outlook_menu_style.vue'], resolve)
+        }
+    },
+    {
+        path: '/table',
+        component: resolve => require(['./views/table.vue'], resolve)
     }
 ];
 

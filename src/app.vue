@@ -1,6 +1,26 @@
-<style scoped>
+<style scope>
     @import 'styles/common.css';
-    .border {border: 1px solid red;}
+    .border {border: 1px solid #e5e5e5;}
+    .ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
+    .ztree li ul{ margin:0; padding:0}
+    .ztree li {line-height:30px;}
+    .ztree li a {width:200px;height:30px;padding-top: 0px;}
+    .ztree li a:hover {text-decoration:none; background-color: #E7E7E7;}
+    .ztree li a span.button.switch {visibility:hidden}
+    .ztree.showIcon li a span.button.switch {visibility:visible}
+    .ztree li a.curSelectedNode {background-color:#D4D4D4;border:0;height:30px;}
+    .ztree li span {line-height:30px;}
+    .ztree li span.button {margin-top: -7px;}
+    .ztree li span.button.switch {width: 16px;height: 16px;}
+
+    .ztree li a.level0 span {font-size: 150%;font-weight: bold;}
+    .ztree li span.button {background-image:url("./assets/imgs/left_menuForOutLook.png"); *background-image:url("./assets/imgs/left_menuForOutLook.gif")}
+    .ztree li span.button.switch.level0 {width: 20px; height:20px}
+    .ztree li span.button.switch.level1 {width: 20px; height:20px}
+    .ztree li span.button.noline_open {background-position: 0 0;}
+    .ztree li span.button.noline_close {background-position: -18px 0;}
+    .ztree li span.button.noline_open.level0 {background-position: 0 -18px;}
+    .ztree li span.button.noline_close.level0 {background-position: -18px -18px;}
 </style>
 <template>
     <div class="container-fluid">
@@ -40,11 +60,15 @@
         </div>
 
         <div class="row">
+            <!--左侧菜单显示-->
             <div class="col-lg-2 border">
-                菜单
+                <ul id="menuTree" class="ztree"></ul>
             </div>
+            <!--页面展示-->
             <div class="col-lg-10 border">
-                <router-view></router-view>
+                <div class="container-fluid">
+                    <router-view></router-view>
+                </div>
             </div>
         </div>
     </div>
@@ -53,11 +77,35 @@
     export default {
         data () {
             return {
-                paths : this.$store.state.paths
+                paths : this.$store.state.paths,
+                menuArr : this.$store.state.menuArr
             }
         },
-        mounted () {
-
+        mounted() {
+            var that = this;
+            console.log('开始初始化...');
+            let setting = {
+                view: {
+                    showLine: false,
+                    showIcon: false,
+                    selectedMulti: false,
+                    dblClickExpand: false,
+                    //addDiyDom: addDiyDom
+                },
+                data: {
+                    simpleData: {
+                        enable: true
+                    }
+                },
+                callback: {
+                    onClick : function(event, treeId, treeNode) {
+                        that.$router.push({path : treeNode.to});
+                    }
+                }
+            };
+            let treeObj = $("#menuTree");
+            $.fn.zTree.init(treeObj, setting, this.menuArr);
+            Toastr.success('菜单初始化完成!!!');
         },
         beforeDestroy () {
 

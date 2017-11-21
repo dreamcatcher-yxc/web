@@ -10,26 +10,13 @@
     export default {
         data() {
             return  {
-
+                menuArr : this.$store.state.menuArr
             }
         },
-        created() {
+        /*不能在 created 中进行菜单的初始化, 因为 created 的时候 dom 结构还没有被解析出来.*/
+        mounted() {
+            var that = this;
             console.log('开始初始化...');
-            let zNodes = [
-                { id:1, pId:0, name:"文件夹", open:true},
-                { id:11, pId:1, name:"收件箱"},
-                { id:111, pId:11, name:"收件箱1"},
-                { id:112, pId:111, name:"收件箱2"},
-                { id:113, pId:112, name:"收件箱3"},
-                { id:114, pId:113, name:"收件箱4"},
-                { id:12, pId:1, name:"垃圾邮件"},
-                { id:13, pId:1, name:"草稿"},
-                { id:14, pId:1, name:"已发送邮件"},
-                { id:15, pId:1, name:"已删除邮件"},
-                { id:3, pId:0, name:"快速视图"},
-                { id:31, pId:3, name:"文档"},
-                { id:32, pId:3, name:"照片"}
-            ];
             let setting = {
                 view: {
                     showLine: false,
@@ -44,16 +31,19 @@
                     }
                 },
                 callback: {
-                   // beforeClick: beforeClick
+                    onClick : function(event, treeId, treeNode) {
+                        console.log(that);
+                        console.log(window.location.href);
+                    }
                 }
             };
             let treeObj = $("#treeDemo");
-            $.fn.zTree.init(treeObj, setting, this.zNodes);
+            $.fn.zTree.init(treeObj, setting, this.menuArr);
         }
     }
 </script>
 
-<style scoped>
+<style scope>
     .ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
     .ztree li ul{ margin:0; padding:0}
     .ztree li {line-height:30px;}

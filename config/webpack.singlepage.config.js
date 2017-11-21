@@ -10,7 +10,7 @@ const config = {
   devtool : 'eval-source-map',
   entry: {
     'main' : `${metaData.SRC}/main.js`,
-    'vendor' : ['jquery', 'bootstrap', 'ztree'],
+    'vendor' : ['jquery', 'bootstrap', 'ztree', 'toastr'],
   },
   output: {
     path : metaData.DIST,
@@ -43,7 +43,8 @@ const config = {
       /*引入jquery*/
       new webpack.ProvidePlugin({
           $: "jquery",
-          jQuery: "jquery"
+          jQuery: "jquery",
+          Toastr : "toastr"
       }),
       /*将入口文件中引入的 css 文件单独抽取为文件*/
       new ExtractTextPlugin("styles.css"),

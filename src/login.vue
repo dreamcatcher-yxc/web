@@ -1,18 +1,14 @@
 <template scope>
-    <h3>{{ msg }}</h3>
+    <div class="pan"></div>
 </template>
 
 <script>
     export default {
         data () {
             return {
-                msg: this.$route.params.msg
             }
         },
         watch : {
-            $route(to, from) {
-                this.msg = to.params.msg;
-            }
         }
     }
 </script>
