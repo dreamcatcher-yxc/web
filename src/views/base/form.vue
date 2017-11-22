@@ -1,5 +1,5 @@
 <template scope>
-    <div class="pan"></div>
+    <b>这里有一个表单</b>
 </template>
 
 <script>

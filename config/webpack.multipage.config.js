@@ -16,7 +16,7 @@ const config = {
     },
     output: {
         path : metaData.DIST,
-        filename: 'js/[name].js'
+        filename: 'util/[name].util'
     },
     module: {
         // 配置匹配规则
@@ -59,7 +59,7 @@ const config = {
     plugins : [
         ...htmlWebPackPlugins
         // new CompressionPlugin({
-        //   test: /\.js/,
+        //   test: /\.util/,
         //   asset: '[path].gz[query]', // 默认值
         //   filename (asset) {
         //     console.log(asset);
@@ -73,7 +73,7 @@ const config = {
     ],
     resolve: {
         alias: {
-            'vue': 'vue/dist/vue.js'
+            'vue': 'vue/dist/vue.util'
         }
     },
 };

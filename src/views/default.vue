@@ -1,20 +1,18 @@
 <style scope>
-    @import 'styles/common.css';
+
 </style>
 <template>
-    <div class="container-fluid">
-        <transition name="fade" >
-          <router-view></router-view>
-        </transition>
-    </div>
+    <b>默认显示的内容</b>
 </template>
 <script>
     export default {
         data () {
             return {
+
             }
         },
         mounted() {
+
         },
         beforeDestroy () {
 

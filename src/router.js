@@ -1,31 +1,54 @@
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import store from  './store';
+
+Vue.use(VueRouter);
+
 const routes = [
     {
         path : '/',
-        redirect : '/menu',
-        component : resolve => require(['./views/index.vue'], resolve)
+        component : resolve => require(['./views/index.vue'], resolve),
+        children : [
+            {
+                path : '',
+                component: resolve => require(['./views/default.vue'], resolve)
+            },
+            {
+                path: '/base/table',
+                component: resolve => require(['./views/base/table.vue'], resolve)
+            },
+            {
+                path: '/base/form',
+                component:  resolve => require(['./views/base/form.vue'], resolve)
+            }
+        ]
     },
     {
-        path: '/index/:msg',
-        customPath : ['/index/this-is-index1.vue', '/index/this-is-index2.vue'],
-        component : resolve => require(['./views/index.vue'], resolve)
-    },
-    {
-        path: '/home2',
-        component:  { template: '<div>home2</div>' }
-    },
-    {
-        path : '/menu',
-        components : {
-            "left-menu" : resolve => require(['./views/outlook_menu_style.vue'], resolve)
-        }
-    },
-    {
-        path: '/table',
-        component: resolve => require(['./views/table.vue'], resolve)
+        path : '/login',
+        component : resolve => require(['./views/login.vue'], resolve)
     }
 ];
 
-var paths = routes.map(router => {
+var router = new VueRouter({routes});
+
+// 每次路由改变的时候都判断用户状态是否有效, 如果有效, 则正常访问, 否则路由到登录页面.
+router.beforeEach((to, from, next) => {
+    if(to.fullPath == '/login' && !store.state.isLogin) {
+        next();
+        return;
+    }
+
+    store.commit('validateIsLogin');
+    if(!store.state.isLogin) {
+        next({
+            path : '/login'
+        });
+    } else {
+        next()
+    }
+});
+
+var tPaths = routes.map(router => {
     return router.customPath || router.path || router.name;
 }).filter(path => {
     return path !== undefined;
@@ -40,10 +63,10 @@ let convert = (source, target) => {
         }
     }
 };
-var exportPaths = [];
-convert(paths, exportPaths);
+var paths = [];
+convert(tPaths, paths);
 
-export default {
-    routes,
-    paths : exportPaths
+export {
+    router,
+    paths
 };

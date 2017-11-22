@@ -10,27 +10,21 @@ const config = {
   devtool : 'eval-source-map',
   entry: {
     'main' : `${metaData.SRC}/main.js`,
-    'vendor' : ['jquery', 'bootstrap', 'ztree', 'toastr'],
+    'vendor' : ['bootstrap', 'jquery', 'ztree', 'toastr'],
   },
   output: {
     path : metaData.DIST,
-    filename: 'js/[name].js'
+    filename: 'util/[name].js'
   },
   module: {
     // 配置匹配规则
-    rules: [
+    loaders: [
         // { test: /\.css$/, loader: 'style-loader!css-loader'},
-        { test: /\.css$/, loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader"})},
-        {test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/, loader: 'url-loader?limit=1024'},
-        { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
-        { test: /\.(woff|woff2)$/, loader:"url-loader?prefix=font/&limit=5000" },
-        { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
-        { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
         {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
-        {test: /\.vue$/, loader: 'vue-loader'}
-    ],
-    // 配置 loaders
-    loaders : [
+        {test: /\.vue$/, loader: 'vue-loader'},
+        { test: /\.css$/, loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader"})},
+        {test: /\.(gif|jpg|png)\??.*$/, loader: 'url-loader?limit=1024'},
+        {test: /\.(eot|svg|ttf|woff|woff2)\w*/, loader: 'url-loader?limit=1000000'}
     ]
   },
   // 配置插件
@@ -48,7 +42,7 @@ const config = {
       }),
       /*将入口文件中引入的 css 文件单独抽取为文件*/
       new ExtractTextPlugin("styles.css"),
-      /*提取公共 js 文件*/
+      /*提取公共 util 文件*/
       new CommonsChunkPlugin({
           name: 'vendor',
           minChunks: Infinity
@@ -56,7 +50,7 @@ const config = {
     ],
     resolve: {
         alias: {
-            'vue': 'vue/dist/vue.js'
+            'vue': 'vue/dist/vue'
         }
     },
 };
