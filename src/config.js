@@ -31,11 +31,14 @@ Toastr.options = {
 
 // 配置全局常量.
 const global = {
-    userKey : 'session'
-}
+    userKey : 'session',
+};
+
+const mockBasePath = 'http://mock.example/api/v1';
 
 export {
     menuArr,
     userArr,
-    global
+    global,
+    mockBasePath
 };

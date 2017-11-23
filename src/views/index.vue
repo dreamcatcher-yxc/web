@@ -1,6 +1,6 @@
 <style scope>
     @import '../styles/common.css';
-    /*.border {border: 1px solid #e5e5e5;}*/
+    .border {border: 1px solid #e5e5e5; border-radius: 5px;}
     .ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
     .ztree li ul{ margin:0; padding:0}
     .ztree li {line-height:30px;}
@@ -70,14 +70,12 @@
 
         <div class="row">
             <!--左侧菜单显示 -->
-            <div class="col-lg-2 border">
-                <ul id="menuTree" class="ztree"></ul>
+            <div class="col-lg-2">
+                <ul id="menuTree" class="ztree border"></ul>
             </div>
             <!--页面展示-->
             <div class="col-lg-10 border">
-                <div class="container-fluid">
-                    <router-view></router-view>
-                </div>
+                <router-view></router-view>
             </div>
         </div>
     </div>

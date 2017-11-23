@@ -36,9 +36,10 @@ const config = {
         }),
       /*引入jquery*/
       new webpack.ProvidePlugin({
-          $: "jquery",
-          jQuery: "jquery",
-          Toastr : "toastr"
+          $: 'jquery',
+          jQuery: 'jquery',
+          Toastr : 'toastr',
+          Vue : 'vue'
       }),
       /*将入口文件中引入的 css 文件单独抽取为文件*/
       new ExtractTextPlugin("styles.css"),
@@ -49,8 +50,12 @@ const config = {
       })
     ],
     resolve: {
+        extensions: ['.js', '.vue'],
         alias: {
-            'vue': 'vue/dist/vue'
+            'vue': 'vue/dist/vue',
+            'config_c' : path.join(metaData.ROOT, './src/config'), // 全局配置文件
+            'axios_c' : path.join(metaData.ROOT, './src/axios'), // axios 配置文件
+            'mock_c' : path.join(metaData.ROOT, './src/mock') // mock 配置文件
         }
     },
 };

@@ -2,6 +2,8 @@ import Vue from 'vue';
 import {router} from './router';
 import store from  './store';
 import App from './app.vue';
+import 'mock_c';
+import axios from 'axios_c';
 
 import 'ztree/css/zTreeStyle/zTreeStyle.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
