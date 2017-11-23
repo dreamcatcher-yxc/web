@@ -16,8 +16,8 @@ const userArr = [
 Toastr.options = {
     closeButton: false,
     debug: false,
-    progressBar: true,
-    positionClass: "toast-bottom-right",
+    progressBar: false,
+    positionClass: "toast-bottom-full-width",
     onclick: null,
     showDuration: "300",
     hideDuration: "1000",

@@ -36,8 +36,6 @@
 </template>
 
 <script>
-    import {mockBasePath} from 'config_c';
-
     export default {
         data () {
             return {
@@ -45,8 +43,12 @@
             }
         },
         created() {
-            this.$http.get(`${mockBasePath}/list`).then((response) => {
-                console.log(response);
+            this.$http.get('/list', {
+                params : {
+                    username : 'zhnangsan',
+                }
+            }).then((response) => {
+
             });
         },
         watch : {

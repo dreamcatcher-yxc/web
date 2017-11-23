@@ -17,12 +17,12 @@ const store = new Vuex.Store({
     mutations: {
         validateIsLogin() {
             let session = getCookie(global.userKey);
-            var userInfo = JSON.parse(session);
-            userInfo.password = undefined;
             if(session == null) {
                 this.state.isLogin = false;
                 this.state.userInfo = null;
             } else {
+                let userInfo = JSON.parse(session);
+                userInfo.password = undefined;
                 this.state.isLogin = true;
                 this.state.userInfo = userInfo;
             }
