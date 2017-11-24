@@ -4,7 +4,7 @@
   "description": "webpack test",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "webpack-dev-server --config config.js  --content-base dist --inline --hot",
+    "dev": "webpack-dev-server --config config.js --content-base dist/ --port 8080 --color --hot --inline ",
     "build": "webpack --config config.js --progress --display-modules --display-reasons --colors",
     "auto-build": "webpack --config config.js --progress --colors --watch"
   },

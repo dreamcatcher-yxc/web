@@ -14,7 +14,8 @@ const config = {
   },
   output: {
     path : metaData.DIST,
-    filename: 'util/[name].js'
+    filename: 'util/[name].js',
+    publicPath : '/dist/'
   },
   module: {
     // 配置匹配规则
@@ -22,7 +23,7 @@ const config = {
         // { test: /\.css$/, loader: 'style-loader!css-loader'},
         {test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
         {test: /\.vue$/, loader: 'vue-loader'},
-        { test: /\.css$/, loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader"})},
+        { test: /\.css$/, loader: ExtractTextPlugin.extract({fallback: "style-loader", use: 'css-loader'})},
         {test: /\.(gif|jpg|png)\??.*$/, loader: 'url-loader?limit=1024'},
         {test: /\.(eot|svg|ttf|woff|woff2)\w*/, loader: 'url-loader?limit=1000000'}
     ]
