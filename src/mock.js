@@ -16,30 +16,46 @@ const addPostMock = (path, handler) => {
 
 let checkNumber = '';
 
+let loginUserInfoArr = [];
+let storageKey = 'hibernateLoginUserInfoArrKey';
+let loginUserInfoArrJson = localStorage.getItem(storageKey) || '[]';
+loginUserInfoArr = JSON.parse(loginUserInfoArrJson);
+
 /**
  * 判断用户是否登录
  * @param: uuid 标记用户在服务器上是否登录的唯一 id.
  * */
 addPostMock('/auth', options => {
-    let uuid = options.body.uuid;
+    let body = JSON.parse(options.body);
+    let uuid = body.uuid;
+    for (let info of loginUserInfoArr) {
+        if(info.uuid == uuid) {
+            return {code : 1, message : '登录状态有效'};
+        }
+    }
     return {code : 2, message : '未登录或者已经失效'};
 });
 
 /*模拟登录*/
 addPostMock('/login', options => {
-    let username = options.body.username;
-    let password = options.body.password;
-    let checkCode = options.body.checkCode || '';
-    if(checkCode == '' || checkCode != checkCode) {
-        return {code : 2, message : '验证码错误'};
-    } else {
-        for (let user of userArr) {
-            if(user.username == username && password == password) {
-                return {code : 1, message : '登录成功'};
-            }
+    let body = JSON.parse(options.body);
+    let username = body.username;
+    let password = body.password;
+    for (let user of userArr) {
+        if(user.username == username && user.password == password) {
+            let uuid = `${new Date().getTime()}${Math.ceil(Math.random() * 1000000)}`;
+            let expireTime = new Date().getTime() + 30 * 60 * 1000;
+            let userInfo = {uuid, username};
+            loginUserInfoArr.push({uuid, expireTime});
+            return {code : 1, message : '登录成功', body : { userInfo }};
         }
-        return {code : 2, message : '用户名或者密码错误'};
     }
+    return {code : 2, message : '用户名或者密码错误'};
+    // let checkCode = options.body.checkCode || '';
+    // if(checkCode == '' || checkCode != checkCode) {
+    //     return {code : 2, message : '验证码错误'};
+    // } else {
+    // }
 });
 
 /*产生随机验证码*/
@@ -111,6 +127,20 @@ addPostMock('/list', options => {
     };
 });
 
-
+setInterval(() => {
+    let time = new Date().getTime();
+    let tArr = [];
+    for (let i = 0; i < loginUserInfoArr.length; i++) {
+        if(loginUserInfoArr[i].expireTime < time) {
+            tArr.push(i);
+        }
+    }
+    tArr.reduce((pv, cv) => {
+        loginUserInfoArr.splice(cv, 1);
+    }, 0);
+    // console.log(loginUserInfoArr);
+    console.log(JSON.stringify(loginUserInfoArr));
+    localStorage.setItem(storageKey, JSON.stringify(loginUserInfoArr));
+}, 1000);
 
 

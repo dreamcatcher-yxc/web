@@ -12,7 +12,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label">用户名</label>
+                            <label for="username" class="col-sm-2 control-label">用户</label>
                             <div class="col-lg-10">
                                 <input v-model.trim="username" type="text" class="form-control" id="username" placeholder="必填">
                             </div>
@@ -23,7 +23,7 @@
                                 <input v-model.trim="password" type="password" class="form-control" id="password" placeholder="必填">
                             </div>
                         </div>
-                        <div class="form-group">
+                       <!-- <div class="form-group">
                             <label for="checkCode" class="col-sm-2 control-label">验证码</label>
                             <div class="col-lg-8">
                                 <input v-model="checkCode" type="text" class="form-control" id="checkCode" placeholder="必填">
@@ -44,7 +44,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="form-group">
                             <div class="col-sm-offset-5 col-sm-7">
                                 <button type="reset" class="btn btn-default">重置</button>
@@ -82,6 +82,8 @@
                 }).then(r => {
                     if(r.isOk()) {
                         Toastr.success(r.msg());
+                        that.$store.commit('hasAuth', r.getAttr('userInfo'));
+                        that.$router.push({path : '/'});
                     } else {
                         Toastr.error(r.msg());
                     }

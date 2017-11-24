@@ -14,11 +14,13 @@ const store = new Vuex.Store({
         isAuth : false
     },
     mutations: {
-        hasAuth(state) {
+        hasAuth(state, userInfo) {
             state.isAuth = true;
+            state.userInfo = userInfo;
         },
         notAuth(state) {
             state.isAuth = false;
+            state.userInfo = null;
         }
     }
 });

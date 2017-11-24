@@ -34,14 +34,14 @@
     export default {
         data () {
             return {
-                pics : []
+                pics : ['~imgs/c-01.jpg', '~imgs/c-02.jpg', '~imgs/c-03.jpg']
             }
         },
         created : function() {
-            let that = this;
-            this.axios.post('/pics').then(response => {
-                that.pics = response.data.body.pics;
-            });
+//            let that = this;
+//            this.axios.post('/pics').then(response => {
+//                that.pics = response.data.body.pics;
+//            });
         },
         mounted() {
 

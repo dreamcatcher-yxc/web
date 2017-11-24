@@ -33,7 +33,7 @@ var router = new VueRouter({routes});
 
 // 每次路由改变的时候都判断用户状态是否有效, 如果有效, 则正常访问, 否则路由到登录页面.
 router.beforeEach((to, from, next) => {
-    console.log('on router beforeEach...');
+    // console.log('on router beforeEach...');
     let isAuth = store.state.isAuth;
     if(!isAuth) {
         if(to.fullPath == '/login') {
@@ -47,8 +47,11 @@ router.beforeEach((to, from, next) => {
             uuid : store.state.userInfo != null ? store.state.userInfo.uuid : undefined
         }).then(r => {
             if(r.isOk()) {
-                store.commit('hasAuth');
-                next({path : to.fullPath == '/login' ? '/' : to.fullPath});
+                if(to.fullPath != '/login') {
+                    next();
+                } else {
+                    next({path : '/'});
+                }
             } else {
                 store.commit('notAuth');
                 next({path : '/login'});
