@@ -33,7 +33,12 @@ const config = {
         new HtmlWebpackPlugin({
             filename : path.join(metaData.DIST, 'index.html'),
             template : path.join(metaData.ROOT, 'index.html'),
-            inject : 'body'
+            inject : 'body',
+            minify: {
+                caseSensitive: false,
+                collapseBooleanAttributes: true,
+                collapseWhitespace: true
+            }
         }),
       /*引入jquery*/
       new webpack.ProvidePlugin({
@@ -50,13 +55,14 @@ const config = {
           minChunks: Infinity
       })
     ],
-    resolve: {
+  resolve: {
         extensions: ['.js', '.vue'],
         alias: {
             'vue': 'vue/dist/vue',
             'config_c' : path.join(metaData.ROOT, './src/config'), // 全局配置文件
             'axios_c' : path.join(metaData.ROOT, './src/axios'), // axios 配置文件
-            'mock_c' : path.join(metaData.ROOT, './src/mock') // mock 配置文件
+            'mock_c' : path.join(metaData.ROOT, './src/mock'), // mock 配置文件
+            '~imgs' : path.join(metaData.ROOT, './src/assets/imgs')
         }
     },
 };

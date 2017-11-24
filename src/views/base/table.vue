@@ -92,13 +92,9 @@
                     page,
                     row
                 }).then((response) => {
-                    console.log(that.bar);
                     let rows = response.data.body.rows;
                     that.count = response.data.body.count;
                     that.calcBar();
-//                    while (that.rows.length > 0) {
-//                        that.r/
-//                    }
                     that.rows = [];
                     rows.reduce((pc, cv) => {
                         that.rows.push(cv);

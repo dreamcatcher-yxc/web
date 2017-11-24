@@ -4,7 +4,7 @@
     .ztree * {font-size: 10pt;font-family:"Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial}
     .ztree li ul{ margin:0; padding:0}
     .ztree li {line-height:30px;}
-    .ztree li a {width:200px;height:30px;padding-top: 0px;}
+    .ztree li a {width:90%; height:30px;padding-top: 0px;}
     .ztree li a:hover {text-decoration:none; background-color: #E7E7E7;}
     .ztree li a span.button.switch {visibility:hidden}
     .ztree.showIcon li a span.button.switch {visibility:visible}
@@ -31,7 +31,7 @@
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
                             <a class="navbar-brand" href="#">
-                                <span class="glyphicon glyphicon-fire" aria-hidden="true"></span>
+                                <span style="color:red" class="glyphicon glyphicon-fire" aria-hidden="true"></span>
                                 Vue 单页面测试
                             </a>
                         </div>

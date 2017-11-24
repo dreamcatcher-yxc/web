@@ -33,18 +33,30 @@ var router = new VueRouter({routes});
 
 // 每次路由改变的时候都判断用户状态是否有效, 如果有效, 则正常访问, 否则路由到登录页面.
 router.beforeEach((to, from, next) => {
-    if(to.fullPath == '/login' && !store.state.isLogin) {
-        next();
-        return;
-    }
-
-    store.commit('validateIsLogin');
-    if(!store.state.isLogin) {
-        next({
-            path : '/login'
-        });
+    console.log('on router beforeEach...');
+    let isAuth = store.state.isAuth;
+    if(!isAuth) {
+        if(to.fullPath == '/login') {
+            next();
+        } else {
+            next({path : '/login'});
+        }
     } else {
-        next()
+        // 每次路由改变的是否如果以前有授权, 则再检验一次有无授权.
+        Vue.axios.post('/auth', {
+            uuid : store.state.userInfo != null ? store.state.userInfo.uuid : undefined
+        }).then(r => {
+            if(r.isOk()) {
+                store.commit('hasAuth');
+                next({path : to.fullPath == '/login' ? '/' : to.fullPath});
+            } else {
+                store.commit('notAuth');
+                next({path : '/login'});
+            }
+        }).catch(r => {
+            store.commit('notAuth');
+            next({path : '/login'});
+        });
     }
 });
 

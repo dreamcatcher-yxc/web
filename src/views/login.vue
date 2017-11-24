@@ -29,7 +29,11 @@
                                 <input v-model="checkCode" type="text" class="form-control" id="checkCode" placeholder="必填">
                             </div>
                             <div class="col-lg-2">
-                                <img src="http://10.66.30.142:9093/checkNumber" alt="点击切换" style="width: 100px; height: 34px; margin-left: -20px;" class="img-thumbnail">
+                                <img :src="checkCodeAddress"
+                                     alt="点击切换"
+                                     style="width: 100px; height: 34px; margin-left: -20px; cursor: pointer"
+                                     class="img-thumbnail"
+                                     @click="changeCheckCode()">
                             </div>
                         </div>
                         <div class="form-group">
@@ -55,11 +59,6 @@
 </template>
 
 <script>
-    import store from '../store';
-    import {router} from '../router'
-    import {setCookie} from '../util/cookieUtil';
-    import {global} from '../config';
-
     export default {
         data () {
             return {
@@ -67,26 +66,33 @@
                 password : '',
                 checkCode : '',
                 remember : false,
-                userArr : store.state.userArr
+                checkCodeAddress: ''
             }
         },
-        watch : {
-//                remember(to, from) {
-//                    console.log(to);
-//                }
+        created(){
+            this.changeCheckCode();
         },
         methods : {
             login() {
-                for (let user of this.userArr) {
-                    if(user.username == this.username && user.password == this.password) {
-                        Toastr.success("登录成功!");
-                        setCookie(global.userKey, JSON.stringify(user), 1);
-                        router.push({path : '/'});
-                        break;
+                var that = this;
+                this.axios.post('/login', {
+                    username : that.username,
+                    password : that.password,
+                    checkCode : that.checkCode
+                }).then(r => {
+                    if(r.isOk()) {
+                        Toastr.success(r.msg());
                     } else {
-                        Toastr.error("用户名或者密码错误!");
+                        Toastr.error(r.msg());
                     }
-                }
+                });
+            },
+            changeCheckCode() {
+                let that = this;
+                this.axios.post('/checkCode').then(r => {
+                    that.checkCodeAddress = r.getAttr('pic');
+                    console.log(that.checkCodeAddress);
+                });
             }
         }
     }

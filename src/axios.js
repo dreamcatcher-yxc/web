@@ -11,7 +11,10 @@ const axios = Axios.create({
 
 // 拦截请求
 axios.interceptors.request.use(function (config) {
-    Toastr.success('开始加载服务器数据...');
+    // Toastr.success('开始加载服务器数据...');
+    if(config.data === undefined || config.data == null) {
+        config.data = {};
+    }
     return config;
 }, function (error) {
     Toastr.error('请求服务器数据出错...');
@@ -20,7 +23,19 @@ axios.interceptors.request.use(function (config) {
 
 // 拦截响应
 axios.interceptors.response.use(function (response) {
-    Toastr.success('接收到服务器响应数据...');
+    response.isOk = function() {
+        return this.data.code == 1;
+    };
+    response.msg = function() {
+        return this.data.message || '';
+    };
+    response.getAttr = function(attr) {
+        let body = this.data.body || {};
+        // console.log(body[attr] || '');
+        return body[attr] || '';
+    }
+    // Toastr.success('接收到服务器响应数据...');
+    // console.log(response);
     return response;
 }, function (error) {
     Toastr.error('接收服务器响应数据出错...');

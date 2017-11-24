@@ -10,22 +10,15 @@ const store = new Vuex.Store({
     state: {
         paths,
         menuArr,
-        userArr,
-        isLogin : true,
-        userInfo : null
+        userInfo : null,
+        isAuth : false
     },
     mutations: {
-        validateIsLogin() {
-            let session = getCookie(global.userKey);
-            if(session == null) {
-                this.state.isLogin = false;
-                this.state.userInfo = null;
-            } else {
-                let userInfo = JSON.parse(session);
-                userInfo.password = undefined;
-                this.state.isLogin = true;
-                this.state.userInfo = userInfo;
-            }
+        hasAuth(state) {
+            state.isAuth = true;
+        },
+        notAuth(state) {
+            state.isAuth = false;
         }
     }
 });
