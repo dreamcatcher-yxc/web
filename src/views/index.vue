@@ -57,7 +57,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="#">个人设置</a></li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="#">退出登录</a></li>
+                                        <li><a href="#" @click="logout">退出登录</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -119,6 +119,20 @@
 
         },
         methods: {
+            logout() {
+                let that = this;
+                if(confirm('您确定要注销当前用户的登录状态吗?')) {
+                    let uuid = this.userInfo.uuid;
+                    this.axios.post('/logout', {uuid}).then(r => {
+                        if(r.isOk()) {
+                            that.$store.commit('notAuth');
+                            that.$router.push({path : '/login'});
+                        } else {
+                            Toastr.error('注销失败!');
+                        }
+                    });
+                }
+            }
         }
     }
 </script>

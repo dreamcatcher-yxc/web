@@ -58,6 +58,25 @@ addPostMock('/login', options => {
     // }
 });
 
+/*注销当前用户的登录状态*/
+addPostMock('/logout', options => {
+    let body = JSON.parse(options.body);
+    let uuid = body.uuid;
+    let needRemoveIndex = -1;
+    for(let i = 0; i < loginUserInfoArr.length; i++) {
+        if(loginUserInfoArr[i].uuid == uuid) {
+            needRemoveIndex = i;
+            break;
+        }
+    }
+    if(needRemoveIndex >= 0) {
+        loginUserInfoArr.splice(needRemoveIndex, 1);
+        return {code : 1, message : '注销成功'};
+    } else {
+        return {code : 2, message : '注销失败'};
+    }
+})
+
 /*产生随机验证码*/
 addPostMock('/checkCode', options => {
     let randNumArr = [];
@@ -139,7 +158,7 @@ setInterval(() => {
         loginUserInfoArr.splice(cv, 1);
     }, 0);
     // console.log(loginUserInfoArr);
-    console.log(JSON.stringify(loginUserInfoArr));
+    // console.log(JSON.stringify(loginUserInfoArr));
     localStorage.setItem(storageKey, JSON.stringify(loginUserInfoArr));
 }, 1000);
 

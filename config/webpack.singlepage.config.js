@@ -34,6 +34,7 @@ const config = {
             filename : path.join(metaData.DIST, 'index.html'),
             template : path.join(metaData.ROOT, 'index.html'),
             inject : 'body',
+            favicon : path.join(metaData.ROOT, 'src/assets/imgs/favicon.ico'),
             minify: {
                 caseSensitive: false,
                 collapseBooleanAttributes: true,
