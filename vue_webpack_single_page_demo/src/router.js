@@ -36,6 +36,7 @@ router.beforeEach((to, from, next) => {
     // console.log('on router beforeEach...');
     let isAuth = store.state.isAuth;
     if(!isAuth) {
+        // 没有授权处理
         if(to.fullPath == '/login') {
             next();
         } else {
@@ -47,6 +48,7 @@ router.beforeEach((to, from, next) => {
             uuid : store.state.userInfo != null ? store.state.userInfo.uuid : undefined
         }).then(r => {
             if(r.isOk()) {
+                // 有权限如果希望访问登录页面则直接跳转到主页面
                 if(to.fullPath != '/login') {
                     next();
                 } else {
