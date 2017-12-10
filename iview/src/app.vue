@@ -1,5 +1,5 @@
-<style scoped>
-    /*@import 'styles/common.css';*/
+<style>
+    @import 'styles/common.css';
 </style>
 <template>
     <div>
@@ -9,7 +9,8 @@
 <script>
     export default {
         data () {
-            return {}
+            return {
+            }
         },
         mounted () {
 

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import iView from 'iview';
 import VueRouter from 'vue-router';
-import Router from './router';
+import Routers from './router';
 import Util from './libs/util';
 import App from './app';
 import 'iview/dist/styles/iview.css';
@@ -12,7 +12,7 @@ Vue.use(iView);
 // 路由配置
 const RouterConfig = {
     mode: 'history',
-    routes: Router
+    routes: Routers
 };
 const router = new VueRouter(RouterConfig);
 

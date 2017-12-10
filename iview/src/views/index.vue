@@ -14,7 +14,7 @@
         }
         h2{
             color: #666;
-            margin-bottom: 200px;
+            margin-bottom: 50px;
             p{
                 margin: 0 0 50px;
             }
@@ -27,25 +27,39 @@
 <template>
     <div class="index">
         <Row type="flex" justify="center" align="middle">
-            <Col span="24">
+            <i-col span="24">
                 <h1>
                     <img src="../images/logo.png">
                 </h1>
                 <h2>
-                    <p>Welcome to your iView app!</p>
-                    <Button type="ghost" @click="handleStart">Start iView</Button>
+                    <p>欢迎</p>
+                    <Button type="ghost" @click="handleStart">开始使用 iview</Button>
                 </h2>
-            </Col>
+                <Row type="flex" justify="center" class="code-row-bg">
+                    <i-col v-for="router in routers" span="2">
+                        <Button type="ghost">
+                            <router-link :to="router.path">{{router.meta.title == '' || router.meta.title === undefined ? '首页' : router.meta.title}}</router-link>
+                        </Button>
+                    </i-col>
+                </Row>
+            </i-col>
         </Row>
     </div>
 </template>
 <script>
+    import routers from '../router';
+
     export default {
+        data() {
+            return {
+                routers
+            }
+        },
         methods: {
             handleStart () {
                 this.$Modal.info({
-                    title: 'Bravo',
-                    content: 'Now, enjoy the convenience of iView.'
+                    title: '提示',
+                    content: 'author: yxc!'
                 });
             }
         }
