@@ -29,9 +29,13 @@
         height: 100%;
     }
     .layout-header{
-        height: 60px;
+        height: 45px;
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    }
+    .avatar {
+        padding-top: 6px;
+        height: 45px;
     }
     .layout-logo-left{
         width: 90%;
@@ -69,9 +73,28 @@
             </Col>
             <Col :span="spanRight">
                 <div class="layout-header">
-                    <Button type="text" @click="toggleClick">
-                        <Icon type="navicon" size="32"></Icon>
-                    </Button>
+                    <Row>
+                        <i-col span="2">
+                            <Button type="text" @click="toggleClick">
+                                <Icon :type="spanLeft > 2 ? 'ios-arrow-back' : 'ios-arrow-forward'" size="30"></Icon>
+                            </Button>
+                        </i-col>
+                        <i-col span="1" offset="19" class-name="avatar">
+                            <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                        </i-col>
+                        <i-col span="2">
+                            <Dropdown style="line-height: 45px; color: #464c5b">
+                                <a href="javascript:void(0)">
+                                    杨秀初
+                                    <Icon type="arrow-down-b"></Icon>
+                                </a>
+                                <DropdownMenu slot="list">
+                                    <DropdownItem>个人信息</DropdownItem>
+                                    <DropdownItem>注销</DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </i-col>
+                    </Row>
                 </div>
                 <div class="layout-breadcrumb">
                     <Breadcrumb>
