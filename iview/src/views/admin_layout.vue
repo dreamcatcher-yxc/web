@@ -27,14 +27,15 @@
     .layout-menu-left{
         background: #464c5b;
         height: 100%;
+        overflow-y: scroll;
     }
     .layout-header{
-        height: 45px;
+        height: 60px;
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
     }
     .avatar {
-        padding-top: 6px;
+        padding-top: 13px;
         height: 45px;
     }
     .layout-logo-left{
@@ -60,15 +61,24 @@
             <Col :span="spanLeft" class="layout-menu-left">
                 <Menu :active-name="activeName" theme="dark" width="auto" :open-names="openNames" @on-select="onSelectChange">
                     <div class="layout-logo-left"></div>
-                    <Submenu v-for="(menu, index) in menus" :name="(index + 1) + ''">
-                        <template slot="title">
+                    <template v-if="spanLeft >= 5">
+                        <Submenu v-for="(menu, index) in menus" :name="(index + 1) + ''">
+                            <template slot="title">
+                                <Icon :type="menu.iconClass" :size="iconSize"></Icon>
+                                <span class="layout-text">{{menu.text}}</span>
+                            </template>
+                            <span class="layout-text">
+                                <MenuItem v-for="(subMenu, subIndex) in menu.subMenus" :name="(index + 1) + '-' + (subIndex + 1)">{{subMenu.text}}</MenuItem>
+                            </span>
+                        </Submenu>
+                    </template>
+                    <template v-else>
+                        <!--收缩的时候显示-->
+                        <MenuItem  v-for="(menu, index) in menus" :name="index + ''">
                             <Icon :type="menu.iconClass" :size="iconSize"></Icon>
                             <span class="layout-text">{{menu.text}}</span>
-                        </template>
-                        <span class="layout-text">
-                            <MenuItem v-for="(subMenu, subIndex) in menu.subMenus" :name="(index + 1) + '-' + (subIndex + 1)">{{subMenu.text}}</MenuItem>
-                        </span>
-                    </Submenu>
+                        </MenuItem>
+                    </template>
                 </Menu>
             </Col>
             <Col :span="spanRight">
@@ -76,14 +86,14 @@
                     <Row>
                         <i-col span="2">
                             <Button type="text" @click="toggleClick">
-                                <Icon :type="spanLeft > 2 ? 'ios-arrow-back' : 'ios-arrow-forward'" size="30"></Icon>
+                                <Icon :type="spanLeft > 2 ? 'ios-arrow-back' : 'ios-arrow-forward'" size="34"></Icon>
                             </Button>
                         </i-col>
                         <i-col span="1" offset="19" class-name="avatar">
                             <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                         </i-col>
                         <i-col span="2">
-                            <Dropdown style="line-height: 45px; color: #464c5b">
+                            <Dropdown style="line-height: 60px; color: #464c5b">
                                 <a href="javascript:void(0)">
                                     杨秀初
                                     <Icon type="arrow-down-b"></Icon>
@@ -142,16 +152,14 @@
             }
         },
         watch : {
-            // activeName(to, from) {
-            //     console.log(from + '->' + to);
-            // }
+            height(to, from) {
+            }
         },
         mounted() {
           var that = this;
           this.height = window.innerHeight;
           this.width = window.innerWidth;
           document.querySelector('.layout-menu-left').style.height = this.height + 'px';
-          document.querySelector('.layout-menu-left').style.height = this.width + 'px';
           window.onresize = function(e) {
               that.height = window.innerHeight;
               that.width = window.innerWidth;
@@ -163,6 +171,9 @@
             },
             // 导航条
             breadcrumbs() {
+                if(this.spanLeft < 5) {
+                    return ['', ''];
+                }
                 var arr = this.activeName.split('-');
                 var level1 = parseInt(arr[0]);
                 var level2 = parseInt(arr[1]);
@@ -180,6 +191,9 @@
                 }
             },
             onSelectChange : function(name) {
+                if(this.spanLeft < 5) {
+                    return;
+                }
                 this.activeName = name;
             }
         }
