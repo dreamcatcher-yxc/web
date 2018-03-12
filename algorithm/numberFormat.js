@@ -16,7 +16,7 @@ function number2Chinese(number) {
             let v = section % 10;
             if(v == 0) {
                 if(section == 0 || !zero) {
-                    zero = true;
+                    zero = true; // 多个 0 的情况下只算为一个'零'
                     result.splice(0, 0, chnNumChar[v]);
                 }
             } else {
@@ -53,3 +53,43 @@ function number2Chinese(number) {
 
 let chnNum = number2Chinese(4294967295);
 console.log(chnNum);
+
+function chinese2Number(chinese) {
+    let chnNumChar = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    let chnNameValue = [
+            {name : '十', value : 10, secUnit : false},
+            {name : '百', value : 100, secUnit : false},
+            {name : '千', value : 1000, secUnit : false},
+            {name : '万', value : 10000, secUnit : true},
+            {name : '亿', value : 100000000, secUnit : true}
+        ];
+
+    let result = 0;
+    let tNum = 0; // 缓存每个单位前一个数(基数)的大小
+    let section = 0; // 缓存每一节的大小
+
+    for(let i = 0; i < chinese.length; i++) {
+        let ele = chinese[i];
+        let tIndex = 0;
+        if((tIndex = chnNumChar.findIndex(v => v == ele)) > -1) {
+            // 是数字
+            tNum = tIndex;
+        } else {
+            // 是数字单位或者节权位单位
+            let unit = chnNameValue.find(v => v.name == ele);
+            if(unit.secUnit) {
+                // 节权位单位, 计算完成之后 section 重置为 0
+                section += (section + tNum) * unit.value;
+                result += section;
+                section = 0;
+            } else {
+                // 数字单位
+                section += tNum * unit.value;
+            }
+            tNum = 0; // 单位计算之后数字归零
+        }
+    }
+    return result;
+}
+
+console.log(chinese2Number('四十二亿九千四百九十六万七千二百九十五'));
