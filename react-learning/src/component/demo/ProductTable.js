@@ -33,8 +33,6 @@ class ProductTable extends React.Component {
             );
         });
 
-        // console.log(categories);
-
         return (
             <div>
                 <div className="title">
