@@ -48,8 +48,9 @@ class FilterableProductTable extends Component {
     }
 
     onSearchChange(e) {
-        this.setState({ searchValue : e.target.value });
-        this.setState({ tableData : this.filterData(generateCopiedTableData(), e.target.value) });
+        this.setState({ searchValue : e.target.value }, () => {
+            this.setState({ tableData : this.filterData(generateCopiedTableData(), this.state.searchValue) });
+        });
     }
 
     filterData(arr, searchValue) {
