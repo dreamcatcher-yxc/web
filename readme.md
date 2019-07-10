@@ -8,4 +8,4 @@
 - vue-router: vue 路由测试文件
 - vue_webpack_single_page_demo: 基于 webpack + vue-router + vue + vuex + jquery + bootstrap + axios 的单页面管理系统
 - vue-ssr: Vue 服务器端渲染
-- react: react 学习笔记
+- react-learning: react 学习笔记
