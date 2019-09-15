@@ -9,3 +9,6 @@
 - vue_webpack_single_page_demo: 基于 webpack + vue-router + vue + vuex + jquery + bootstrap + axios 的单页面管理系统
 - vue-ssr: Vue 服务器端渲染
 - react-learning: react 学习笔记
+- typescript-learning: typescript 学习笔记
+- functionl-programming: JS 函数式编程代码笔记
+- dva-learning: dva 代码笔记

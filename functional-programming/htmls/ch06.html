@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="UTF-8">
+        <title>实例应用</title>
+        <script type="text/javascript" src="https://cdn.bootcss.com/require.js/2.3.6/require.js"></script>
+        <script type="text/javascript" src="./js/config.js"></script>
+    </head>
+    <body>
+        <div class="formContainer">
+            <form action="#">
+                <input id="inputValue" type="text" name="name" placeholder="请输入商品名">
+                &nbsp;&nbsp;
+                <input type="submit" value="搜索">
+            </form>
+        </div>
+        <div class="resultContainer">
+        </div>
+        <script type="text/javascript">
+            require(['ramda', 'jquery'], function (_, $) {
+                var trace = _.curry(function(tag, x) {
+                    console.log(tag, x);
+                    return x;
+                });
+
+                var Impure = {
+                    
+                    getJSON: _.curry(function(callback, url) {  
+                        $.ajax({
+                            url : url,
+                            dataType : 'jsonp',
+                            contentType : 'application/json'
+                        })
+                        .done(callback)
+                        .fail(function(data) {
+                            console.error(data);
+                        });
+                    }),
+
+                    setHtml: _.curry(function(sel, html) {
+                        $(sel).html(html);
+                    })
+                };
+
+                var url = function (term) {
+                    return 'https://suggest.taobao.com/sug?code=utf-8&q=' + term;
+                };
+
+                var item = _.curry(function(nameIndex, priceIndex, resultArr) {
+                    // console.log('nameIndex: ', nameIndex, ', priceIndex: ', priceIndex, 'resultArr: ', resultArr.join('、'));
+                    return {
+                        name : resultArr[nameIndex],
+                        price : resultArr[priceIndex]
+                    }
+                });
+
+                var orderItem = _.curry(function(item) {
+                    return `<li>${item.name}: ${item.price}</li>`;
+                });
+                
+                // var app = _.compose(Impure.getJSON(trace("response")), url);
+                var renderOrders = _.curry(function(sel, orders) {
+                    $(sel).html($(`<ul style="list-style: none;">${orders.join('')}</ul>`))
+                });
+
+                var item2OrderItem = _.compose(orderItem, trace('orders'), item(0, 1));
+                // var items = _.compose(renderOrders('.resultContainer'), _.map(orderItem), trace('orders'), _.map(item(0, 1)), _.prop('result'));
+                var items = _.compose(renderOrders('.resultContainer'), _.map(item2OrderItem), _.prop('result'));
+                var search = _.compose(Impure.getJSON(items), url);
+
+                $('.formContainer input[type=submit]').on('click', function() {
+                    var searchVal = $('#inputValue').val();
+                    search(searchVal);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

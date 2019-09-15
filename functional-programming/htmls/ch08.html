@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="UTF-8">
+        <title>示例应用</title>
+        <script type="text/javascript" src="https://cdn.bootcss.com/require.js/2.3.6/require.js"></script>
+        <script type="text/javascript" src="./js/config.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            require(['ramda', 'jquery', 'io', 'params'], function (_, $, IO, findParam) {
+                var trace = _.curry(function(tag, x) {
+                    console.log(tag, x);
+                    return x;
+                });
+
+                // io_window_ :: IO Window
+                var io_window = new IO(function(){ return window; });
+                var res1 = io_window.map(function(win){ return win.innerWidth });
+                console.log(res1);
+
+                // IO(1430)
+                var res2 = io_window.map(_.prop('location')).map(_.prop('href')).map(_.split('/'));
+                console.log(res2);
+                // IO(["http:", "", "localhost:8000", "blog", "posts"])
+                // $ :: String -> IO [DOM]
+                var $ = function(selector) {
+                    return new IO(function(){ return document.querySelectorAll(selector); });
+                }
+
+                var res3 = $('#myDiv').map(_.head).map(function(div){ return div.innerHTML; });
+                console.log(res3);
+                // IO('I am some inner html')
+
+                var res3 = findParam("searchTerm").__value();
+                console.log(res3);
+                // Maybe(['searchTerm', 'wafflehouse'])
+            });
+        </script>
+    </body>
+</html>

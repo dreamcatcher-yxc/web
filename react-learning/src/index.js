@@ -19,6 +19,9 @@ import { run } from './redux-demo/index'
 // react-router 测试 demo
 import { run as run2 } from './react-router-demo/index'
 
+// 测试 react 本身的一些特性功能
+import renderFeature from './feature-demo'
+
 // 实现每隔一秒渲染一次
 // setInterval(() => {
 //   ReactDOM.render(
@@ -119,8 +122,6 @@ function reducerSimpleDemo() {
     unsubscribe();
 }
 
-// run();
-run2();
-
-
-
+run();
+// run2();
+// renderFeature();
