@@ -13,5 +13,13 @@ define(['ramda'], function(_) {
         return new IO(_.compose(f, this.__value));
     }
 
+    IO.prototype.unsafePerformIO = function() {
+        return this.__value();
+    }
+
+    IO.prototype.join = function() {
+        return this.unsafePerformIO();
+    }
+
     return IO;
 });

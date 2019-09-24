@@ -365,6 +365,155 @@ var ex6 = function() {
     console.log(ex6({ name : 'ls', active : false}))
 }
 
+// 练习 7
+// ==========
+// 写一个验证函数，检查参数是否 length > 3。如果是就返回 Right(x)，否则就返回
+// Left("You need > 3")
+var ex7 = function(){
+    var ex7 = function(x) {
+        return x.length > 3 ? Right.of(x) : Left.of('You need > 3')
+    }
+    console.log(ex7([1, 2, 3]))
+    console.log(ex7([1, 2, 3, 4]))
+}
+
+// 练习 8
+// ==========
+// 使用练习 7 的 ex7 和 Either 构造一个 functor，如果一个 user 合法就保存它，否则
+// 返回错误消息。别忘了 either 的两个参数必须返回同一类型的数据。
+var ex8 = function() {
+    var save = function(x){
+        return new IO(function() {
+            console.log("SAVED USER!")
+            return x + '-saved'
+        })
+    }
+        
+    const validateName = ({ name }) => {
+        return name.length > 3 ? Right.of(name) : Left.of('You need > 3')
+    }
+    
+    const validateUser = _.curry(function(nameValidator, user) {
+        var res = nameValidator(user)
+        console.log(res)
+        return res
+    })
+
+    const showWelcome = _.compose(_.concat('Welcome '), _.prop('name'))
+      
+    const saveAndWelcome = _.compose(map(showWelcome), save)
+    
+    const register = compose(
+        either(IO.of, saveAndWelcome),
+        validateUser(validateName),
+    )
+
+    console.log(register({ name : 'aaa' }))
+    console.log(register({ name : 'aaaa' }))
+}
+
+// 练习 1
+// ==========
+// 给定一个 user，使用 safeProp 和 map/join 或 chain 安全地获取 sreet的 name
+var ex9_1 = function() {
+    var safeProp = _.curry(function (x, o) { return Maybe.of(o[x]) })
+
+    var user = {
+        id: 2,
+        name: "albert",
+        address: {
+            street: {
+                number: 22,
+                name: 'Walnut St'
+            }
+        }
+    }
+
+    var chain = _.curry(function(f, m) {
+        return m.map(f).join();
+    })
+
+    var ex1 = _.compose(chain(safeProp('street')), safeProp('address'))
+    console.log(ex1(user))
+}   
+
+// 练习 2
+// ==========
+// 使用 getFile 获取文件名并删除目录，所以返回值仅仅是文件，然后以纯的方式打印文件
+var ex9_2 = function() {
+    var getFile = IO.of('C:/foo/foo.txt')
+    
+    var pureLog = function(x) {
+        return new IO(function() {
+            console.log(x)
+            return 'logged ' + x
+        })
+    }
+
+    var basename = _.compose(_.last,  _.split('/'))
+
+    var chain = _.curry(function(f, m) {
+        return m.map(f).join();
+    })
+    
+    var ex2 = _.compose(chain(pureLog),  _.map(basename))
+    console.log(ex2(getFile).__value())
+}
+
+// 练习 4
+// ==========
+// 用 validateEmail、addToMailingList 和 emailBlast 实现 ex4 的类型签名
+// addToMailingList :: Email -> IO([Email])
+var ex9_3 = function() {
+    // addToMailingList :: Email -> IO([Email])
+    var addToMailingList = (function(list){
+        return function(email) {
+            return new IO(function(){
+                list.push(email);
+                return list;
+            })
+        }
+    })([])
+        
+    function emailBlast(list) {
+        return new IO(function(){
+            return 'emailed: ' + list.join(',')
+        })
+    }
+
+    var validateEmail = function(x){
+        return x.match(/\S+@\S+\.\S+/) ? (new Right(x)) : (new Left('invalid email'))
+    }
+
+    var chain = _.curry(function(f, m) {
+        return m.map(f).join()
+    })
+
+    // ex4 :: Email -> Either String (IO String)
+    var ex4 = _.compose(
+        _.map(
+            _.compose(
+                chain(emailBlast),
+                function(x) {
+                    console.log(x)
+                    return x
+                },
+                addToMailingList
+            )
+        ),
+        validateEmail
+    )
+
+    console.log(ex4('aaa@163.com'))
+}
+
+const test10_1 = function() {
+    var res = Container.of(_.add)
+                .ap(Container.of(2))
+                .ap(Container.of(3))
+    console.log(res)
+}
+
 var methodName = readlineSync.question('请输入需要执行的函数名称: ', { encoding : 'UTF-8' } )
 
 try {

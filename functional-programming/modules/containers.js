@@ -12,6 +12,10 @@ Container.prototype.map = function(f){
     return Container.of(f(this.__value))
 }
 
+Container.prototype.ap = function(other_container) {
+    return other_container.map(this.__value)
+}
+
 const Maybe = function(x) {
     this.__value = x
 }
@@ -28,6 +32,10 @@ Maybe.prototype.isNothing = function() {
 Maybe.prototype.map = function(f) {
     return this.isNothing() ? Maybe.of(null) : Maybe.of(f(this.__value));
 }    
+
+Maybe.prototype.join = function(f) {
+    return this.__value
+}
 
 var Left = function(x) {
     this.__value = x;
@@ -77,6 +85,10 @@ IO.of = function(x) {
 
 IO.prototype.map = function(f) {
     return new IO(_.compose(f, this.__value))
+}
+
+IO.prototype.join = function() {
+    return this.__value()
 }
 
 exports.Container = Container

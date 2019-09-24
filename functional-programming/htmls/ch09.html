@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="UTF-8">
+        <title>monad</title>
+        <script type="text/javascript" src="https://cdn.bootcss.com/require.js/2.3.6/require.js"></script>
+        <script type="text/javascript" src="./js/config.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            hello world!
+        </div>
+        <div id="main2">
+            hello world!
+        </div>
+
+        <script type="text/javascript">
+            require(['ramda', 'jquery', 'io', 'params'], function (_, $, IO, findParam) {
+                // log :: a -> IO a
+                var log = function(x) {
+                    return new IO(function() {
+                        console.log(x);
+                        return x;
+                    });
+                };
+
+                // setStyle :: Selector -> CSSProps -> IO DOM
+                var setStyle = _.curry(function(sel, props) {
+                    return new IO(function() {
+                        return $(sel).css(props);
+                    })
+                });
+
+                // getItem :: String -> IO String
+                var getItem = function(key) {
+                    return new IO(function() { return localStorage.getItem(key); });
+                };
+
+                // join :: Monad m => m (m a) -> m a
+                var join = function(mma){ return mma.join(); }
+
+                // applyPreferences :: String -> IO DOM
+                var applyPreferences = _.compose(join, _.map(setStyle('#main')), join, _.map(log), _.map(JSON.parse), getItem);
+
+                /**
+                 * 可以将 _.map(log) 和 join 合并为  chain, 定义如下
+                 */
+                var chain = _.curry(function(f, m) {
+                    return m.map(f).join();
+                });
+
+                console.log(applyPreferences('preferences').unsafePerformIO())
+
+                // 使用 chain 代替 join 和 _.map
+                var applyPreferences = _.compose(chain(setStyle('#main2')), chain(log), _.map(JSON.parse), getItem);
+                
+                console.log(applyPreferences('preferences').unsafePerformIO())
+            });
+        </script>
+    </body>
+</html>
