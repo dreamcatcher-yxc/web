@@ -71,8 +71,12 @@ const test1 = function() {
     console.log(shotRes)
 }
 
+// ch07 
 const test2 = function() {
-    console.log('run test2')
+    // reduce :: (b -> a -> b) -> b -> [a] -> b
+    var reduce = _.curry(function(f, x, xs) {
+        return xs.reuduce(f, x);
+    });
 }
 
 // 测试 Container
@@ -147,6 +151,7 @@ var test5 = function() {
     // => Maybe { __value: '明楼街道' }
 }
 
+// withDraw
 var test6 = function() {
     // withdraw :: Number -> Account -> Maybe(Account)
     var withdraw = curry(function(amount, account) {
@@ -294,6 +299,15 @@ var test11 = function() {
     var res4 = cmplaw2('3')
     console.log(res3)
     console.log(res4)
+}
+
+// chapter test1
+var ch10_1 = function() {
+    var res1 = Container.of(_.add(2)).ap(Container.of(3))
+    console.log(res1)
+
+    var res2 = Container.of(2).map(_.add).ap(Container.of(3))
+    console.log(res2)
 }
 
 // ch08 习题
