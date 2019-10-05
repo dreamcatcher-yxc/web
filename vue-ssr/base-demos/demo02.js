@@ -26,3 +26,4 @@ server.get('*', (req, res) => {
 })
 
 server.listen(8080)
+console.log('accessUrl: ', 'http://127.0.0.1:8080')

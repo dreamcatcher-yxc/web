@@ -4,7 +4,10 @@ const createRender = require('vue-server-renderer').createRenderer
 
 // 第 1 步：创建一个 Vue 实例
 const app = new Vue({
-    template: `<h1>hello world!</h1>`
+    data : {
+      msg : 'hello world!'
+    },
+    template: `<h1 v-text="msg"></h1>`
 })
 
 // 第 2 步：创建一个 renderer

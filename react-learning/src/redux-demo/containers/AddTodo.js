@@ -29,6 +29,7 @@ let AddTodo = ({ dispatch }) => {
     </div>
   )
 }
+
 AddTodo = connect()(AddTodo)
 
 export default AddTodo
