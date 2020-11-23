@@ -35,6 +35,7 @@ class Dep {
     removeSub (sub) {
         remove(this.subs, sub)
     }
+
     /*Github:https://github.com/answershuto*/
     notify () {
         // stabilize the subscriber list first
@@ -71,7 +72,7 @@ function defineReactive (obj, key, val, cb) {
                 dep.addSub(Dep.target);
             }
         },
-        set:newVal=> {
+        set: newVal=> {
             /*只有之前addSub中的函数才会触发*/
             dep.notify();
         }
@@ -93,19 +94,20 @@ let vm = new Vue({
         text2: 1
     },
     render () {
-        console.log('render')
+        console.log('begin render')
     }
 })
 
 // 创建依赖
-let t = vm._data.text
+// let t = vm._data.text
+// let t2 = vm._data.text2
 
 setTimeout(() => {
-    vm._data.text = 'ccc'
     console.log('修改 text')
+    vm._data.text = 'ccc'
 }, 3000);
 
 setTimeout(() => {
-    vm._data.text2 = 2
     console.log('修改 text2')
+    vm._data.text2 = 2
 }, 6000);

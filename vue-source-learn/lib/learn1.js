@@ -11,7 +11,7 @@ function defineReactive (obj, key, val, cb) {
             /*Github:https://github.com/answershuto*/
             return val
         },
-        set:newVal=> {
+        set: newVal => {
             val = newVal;
             cb();/*订阅者收到消息的回调*/
         }
@@ -32,7 +32,7 @@ let app = new Vue({
         text2: 'text2'
     },
     render(){
-        console.log("render");
+        console.log('render');
     }
 })
 
