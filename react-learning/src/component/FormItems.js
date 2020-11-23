@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class YInput  extends Component {
+class YInput extends Component {
     constructor(props) {
         super(props);
         this.state = { ...props };

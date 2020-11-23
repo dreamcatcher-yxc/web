@@ -23,15 +23,16 @@ import { run as run2 } from './react-router-demo/index'
 import renderFeature from './feature-demo'
 
 // 实现每隔一秒渲染一次
-// setInterval(() => {
-//   ReactDOM.render(
-//     <div>{ new Date().toLocaleTimeString() }</div>,
-//     document.getElementById('root')
-//   );
-// }, 1000);
+function test1 () {
+  setInterval(() => {
+    ReactDOM.render(
+      <div>{ new Date().toLocaleTimeString() }</div>,
+      document.getElementById('root')
+    );
+  }, 1000);
+}
 
 // 函数式组件
-
 function Welcome(props) {
   return <h1>hello, {props.name}</h1>;
 } 
@@ -45,21 +46,45 @@ function MyApp() {
     </div>
 }
 
+// 复合组件测试
+function test2 () {
+  ReactDOM.render(
+    <MyApp />,
+    document.getElementById('root')
+  );
+}
+
 const element = <Welcome name="xiuchu.yang"></Welcome>
 
-// ReactDOM.render(
-//   <div>
-//     <form action="#" method="post">
-//       <YInput name="username" value="xiuchu.yang" placeholder="用户名" />
-//     </form>
-//     <hr />
-//     <Calculator></Calculator>
-//     <hr />
-//     <FilterProductTable />
-//   </div>,
-//   document.getElementById('root')
-// );
+// 函数式组件引用
+function test3 () {
+  ReactDOM.render(
+    element,
+    document.getElementById('root')
+  );
+}
 
+function test4 () {
+  ReactDOM.render(
+    <div>
+      <form action="#" method="post">
+        <YInput name="username" value="xiuchu.yang" placeholder="用户名" />
+      </form>
+      <hr />
+      <Calculator></Calculator>
+      <hr />
+      <FilterableProductTable />
+    </div>,
+    document.getElementById('root')
+  );
+}
+
+function test5 () {
+  ReactDOM.render(
+    <Clock />,
+    document.getElementById('root')
+  );
+}
 
 // ReactDOM.render(
 //   <FilterableProductTable />,
@@ -122,6 +147,7 @@ function reducerSimpleDemo() {
     unsubscribe();
 }
 
-run();
+test5();
+// run();
 // run2();
 // renderFeature();
