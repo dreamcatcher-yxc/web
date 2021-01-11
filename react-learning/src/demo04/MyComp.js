@@ -7,7 +7,7 @@ class MyComp extends React.Component {
   }
 
   componentDidMount () {
-    console.log(this.props.titleRef)
+    // console.log(this.props.titleRef)
   }
 
   render () {
