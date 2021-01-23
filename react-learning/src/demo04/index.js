@@ -44,6 +44,7 @@ class App extends React.Component {
         <button onClick={ this.changeColor }>更改标题颜色</button>
         &nbsp;&nbsp;
         <button onClick={ () => this.changeChildColor(this.titleRef) }>更改子组件标题颜色</button>
+        &nbsp;&nbsp;
         <button onClick={ () => this.changeChildColor(this.titleRef2) }>更改子组件2标题颜色</button>
       </div>
     )
