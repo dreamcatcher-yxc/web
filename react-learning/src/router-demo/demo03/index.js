@@ -1,0 +1,2 @@
+// import './BorwserRouterExample'
+import './HashRouterExample'
