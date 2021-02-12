@@ -61,6 +61,7 @@ const getConfirmation = (message, callback) => {
  *  BrowserRouter.getUserConfirmation 表示进入路由之前的回调
  *  BrowserRouter.forceRefresh 是否每次进入新路由的时候都强制刷新页面（通常用在服务器渲染或者不支持 HTML5 history API 的浏览器）
  *  BrowserRouter.hashType 可选值为：slash、noslash、hashbang（Google已弃用），默认为 slash
+ * 
  */
 function App () {
   return (
