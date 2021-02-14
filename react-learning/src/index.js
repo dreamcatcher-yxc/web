@@ -13,5 +13,7 @@
 // import './demo15'
 // import './router-demo/demo03'
 // import './router-demo/demo04'
-import './router-demo/demo05'
+// import './router-demo/demo05'
+import { run } from './redux-demo'
+run()
 
