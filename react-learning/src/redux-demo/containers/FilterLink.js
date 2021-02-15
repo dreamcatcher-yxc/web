@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 /**
- * 该方法的允许我们将 action 绑定到组建中
+ * 该方法的允许我们将 action 绑定到组件中
  * @param {*} dispatch 对应 redux 的 dispatch(事件分发器)
  * @param {*} ownProps 被包裹组件自身的 prop
  */
