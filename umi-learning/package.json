@@ -32,8 +32,8 @@
     "tslint": "^5.12.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
-    "umi": "^2.7.0",
-    "umi-plugin-react": "^1.9.17",
+    "umi": "^3.3.7",
+    "@umijs/preset-react": "^1",
     "umi-types": "^0.3.0"
   },
   "lint-staged": {
