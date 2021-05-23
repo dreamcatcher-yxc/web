@@ -9,6 +9,7 @@ export default defineConfig({
    */
   routes : [
     { path: '/', component: './index', title: '首页' },
+    { path: '/index2', component: '@/layouts/adminLayout.jsx', title: '首页2' },
     {
       path: '/users',
       component: './users/index',

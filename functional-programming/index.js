@@ -270,14 +270,49 @@ var test9 = function() {
 // IO 测试
 var test10 = function() {
     // io_window_ :: IO Window
-    var io_window = new IO(function(){ return {} })
-    var res1 = io_window.map(function(win){ return 100 }).__value()
+    var io_window = new IO(function(){ return { innerWidth: 100 } })
+    var res1 = io_window.map(function(win) {
+        console.log(win)
+        return win.innerWidth 
+    }).__value()
     console.log(res1)
     // IO(1430)
 }
 
-// 恒等定律、结合律 测试
 var test11 = function() {
+    const searchUrl = 'https://www.example.com/search?searchTerm=wafflehouse';
+
+    const window = {
+        location: {
+            href: searchUrl
+        }
+    };
+
+    let log = val => {
+        console.log(val);
+        return val;
+    }
+
+    // url :: IO String
+    var url = new IO(function() { return window.location.href; });
+    // toPairs = String -> [[String]]
+    var toPairs = compose(_.map(_.split('=')), _.split('&'));
+    // params :: String -> [[String]]
+    var params = compose(toPairs, _.last,  _.split('?'), log);
+    console.log(params('aaa?bbb=aaaa'))
+    // findParam :: String -> IO Maybe [String]
+    var findParam = function(key) {
+        return _.map(compose(Maybe.of, _.filter(compose(_.equals(key), _.head)), params), Container.of(searchUrl));
+    };
+
+    // 调用 __value() 来运行它！
+    let res = findParam("searchTerm");
+    console.log(res);
+    // Maybe(['searchTerm', 'wafflehouse'])
+}
+
+// 恒等定律、结合律 测试
+var test111 = function() {
     var idRaw1 = map(id)
     var idRaw2 = id
 

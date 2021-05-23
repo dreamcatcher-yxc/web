@@ -79,8 +79,7 @@ var IO = function(f) {
 }
 
 IO.of = function(x) {
-    return new IO(function() { return x
-    })
+    return new IO(function() { return x })
 }
 
 IO.prototype.map = function(f) {

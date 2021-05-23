@@ -9,7 +9,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "antd": "^3.19.5",
+    "antd": "^4.12.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-transition-group": "^4.2.2"
@@ -19,6 +19,7 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-test-renderer": "^16.0.3",
+    "@umijs/preset-react": "^1",
     "babel-eslint": "^9.0.0",
     "eslint": "^5.4.0",
     "eslint-config-umi": "^1.4.0",
@@ -33,7 +34,6 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^3.6.0",
     "umi": "^3.3.7",
-    "@umijs/preset-react": "^1",
     "umi-types": "^0.3.0"
   },
   "lint-staged": {
