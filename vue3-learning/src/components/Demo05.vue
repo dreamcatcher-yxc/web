@@ -29,8 +29,8 @@ export default {
 }
 </script>
 
-<style scoped vars="{ color }">
+<style scoped>
 h1 {
-  color: var(--color);
+  color: v-bind(color);
 }
 </style>

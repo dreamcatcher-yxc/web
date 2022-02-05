@@ -55,3 +55,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - `Demo08` Vue3 `for` 中 refs 不再自动注册数组
 - `Demo09` Vue3 中的函数式组件，既 **只能使用普通函数创建功能组件**
 - `Demo10` 需要使用 `defineAsyncComponent` 显式的定义异步组件
+- `Demo11` Vue3.2+ expose 测试
+- `Demo12` Vue3 setup 语法糖    
+    > 个人觉得虽然减少了代码量，但是没有原来的 setup 写法直观，而且 eslint 的支持目前不好，暂时不深入了解。

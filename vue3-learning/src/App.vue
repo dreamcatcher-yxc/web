@@ -31,6 +31,12 @@
 
   <hr />
   <Demo10 />
+
+  <hr />
+  <Demo11 />
+
+  <hr />
+  <Demo12 foo="this is foo property" />
 </template>
 
 <script>
@@ -45,6 +51,8 @@ import Demo07 from './components/Demo07.vue'
 import Demo08 from './components/Demo08.vue'
 import Demo09 from './components/Demo09.vue'
 import Demo10 from './components/Demo10.vue'
+import Demo11 from './components/Demo11.vue'
+import Demo12 from './components/Demo12.vue'
 
 export default {
   name: 'App',
@@ -59,7 +67,9 @@ export default {
     Demo07,
     Demo08,
     Demo09,
-    Demo10
+    Demo10,
+    Demo11,
+    Demo12
   }
 }
 </script>
