@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用fetch导入webasse</title>
+</head>
+<body>
+  <script src="./wasm-utils.js"></script>
+  <script type="text/javascript">
+    const importObj = {
+      myFunction: function (arg1, arg2) {
+        console.log('aaa');
+      }
+    };
+    fetchAndInstantiate('./hello3.wasm',importObj)
+      .then(function(instance) {
+        // 调用导出函数：
+        instance.exports.myFunction();
+      });
+  </script>
+</body>
+</html>

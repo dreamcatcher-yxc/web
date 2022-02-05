@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_webpack_project=self.webpackChunkmy_webpack_project||[]).push([[370],{370:(e,c,l)=>{function p(){return"hello world!"}l.r(c),l.d(c,{sayHello:()=>p})}}]);

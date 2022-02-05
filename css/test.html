@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>居中</title>
+  <link rel="stylesheet" href="./normalize.css">
+  <style type="text/css">
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: darkgoldenrod;
+    }
+
+    .horizontal-center {
+      text-align: center;
+    }
+
+    .outer-box {
+      position: relative;
+      height: 200px;
+      border: 1px solid red;
+    }
+
+    .red-border {
+      border: 1px solid red;
+    }
+
+    .verical-center-1 {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -50px 0 0 -50px;
+    }
+
+    .verical-center-2 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    .verical-center-3 {
+      position: absolute;
+      left: calc(50% - 50px);
+      top: calc(50% - 50px);
+    }
+
+    .verical-center-4 {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+  </style>
+</head>
+<body>
+  <fieldset>
+    <legend>水平居中</legend>
+    <div class="horizontal-center">
+      这是文本
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>垂直居中(已知需要居中元素尺寸)-1</legend>
+    <div class="outer-box">
+      <div class="box verical-center-1"></div>
+    </div>
+  </fieldset>
+  
+  <fieldset>
+    <legend>垂直居中(已知需要居中元素尺寸)-2</legend>
+    <div class="outer-box">
+      <div class="box verical-center-2"></div>
+    </div>
+  </fieldset>
+  
+  <fieldset>
+    <legend>垂直居中(已知需要居中元素尺寸)-3</legend>
+    <div class="outer-box">
+      <div class="box verical-center-3"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>垂直居中(需要居中元素尺寸未知)-4</legend>
+    <div class="outer-box">
+      <div class="box verical-center-4"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>垂直居中(需要居中元素尺寸未知)-5</legend>
+    <div style="height: 200px; width: 400px; border: 1px solid red; writing-mode: vertical-lr; text-align: center;">
+      <div style="display: inline-block; writing-mode: horizontal-tb; text-align: center; width: 100%;">
+        <div class="box" style="display: inline-block;"></div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>垂直居中(需要居中元素尺寸未知)-6</legend>
+    <div style="display: table-cell; height: 200px; width: 400px; border: 1px solid red; vertical-align: middle; text-align: center;">
+      <div class="box" style="display: inline-block;"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>垂直居中(需要居中元素尺寸未知)-7</legend>
+    <div class="red-border" style="display: flex; height: 200px; justify-content: center; align-items: center;">
+      <div class="box"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>垂直居中(需要居中元素尺寸未知)-7</legend>
+    <div class="red-border" style="display: grid; height: 200px;">
+      <div class="box" style="justify-self: center; align-self: center;"></div>
+    </div>
+  </fieldset>
+</body>
+</html>
