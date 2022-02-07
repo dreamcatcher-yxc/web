@@ -9,3 +9,5 @@
   - test3.js - 变量声明
   - test4.js - 接口
   - test5.js - 类
+  - test6.js - 函数
+  
