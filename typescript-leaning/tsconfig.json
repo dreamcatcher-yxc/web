@@ -1,11 +1,24 @@
 {
   "compilerOptions": {
-      "outDir": "./built",
-      "allowJs": true,
-      "target": "es5",
-      // "strictNullChecks": true
+    "outDir": "./built/namespaceTest",
+    "allowJs": true,
+    "target": "es2015",
+    "strictNullChecks": true,
+    "module": "AMD"
   },
   "include": [
-      "./src/**/*"
+    // "./src/test1.ts",
+    // "./src/test2.ts",
+    // "./src/test3.ts",
+    // "./src/test4.ts",
+    // "./src/test5.ts",
+    // "./src/test6.ts",
+    // "./src/test7.ts",
+    // "./src/test8.ts",
+    // "./src/test9.ts",
+    // "./src/test10.ts",
+    // "./src/test11.ts",
+    // "./src/moduleTest/**/*",
+    "./src/namespaceTest/**/*"
   ]
 }

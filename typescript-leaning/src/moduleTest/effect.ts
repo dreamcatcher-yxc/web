@@ -1,0 +1,1 @@
+window['effect'] = 1;
