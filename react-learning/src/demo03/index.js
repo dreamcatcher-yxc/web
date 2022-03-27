@@ -30,6 +30,7 @@ function App() {
           <MyComp />
         </div>
       </MyContext.Provider>
+      {/* 此组件因为没有提供值，则使用默认值 */}
       <MyComp2 />
     </div>
   )

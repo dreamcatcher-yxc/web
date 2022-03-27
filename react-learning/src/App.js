@@ -8,7 +8,7 @@ function nowDate() {
 }
 
 const helloWorldElement = <h1>Hello, world!!!</h1>
-const nowDate = <h1>当前时间: { nowDate() }</h1>
+const nowDateElem = <h1>当前时间: { nowDate() }</h1>
 
 class App extends Component {
   render() {
@@ -28,7 +28,7 @@ class App extends Component {
         </div>
 
         <hr />
-        { nowDate }
+        { nowDateElem }
       </div>
     );
   }
