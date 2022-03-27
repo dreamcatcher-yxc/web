@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./built/namespaceTest",
+    "outDir": "./built",
     "allowJs": true,
     "target": "es2015",
     "strictNullChecks": true,
@@ -19,6 +19,7 @@
     // "./src/test10.ts",
     // "./src/test11.ts",
     // "./src/moduleTest/**/*",
-    "./src/namespaceTest/**/*"
+    // "./src/namespaceTest/**/*",
+    "./src/test12.ts"
   ]
 }
