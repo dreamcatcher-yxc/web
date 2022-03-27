@@ -42,4 +42,9 @@
       
       > 命名空间解决的是全局作用域下多个命名冲突的问题，相当于 Java 通过包名隔离多个区分多个同名的类；而模块则是为了解决代码过多之后如何模块化拆分的问题。通常来说一个模块中命名是不会重复的，如果重复则是代码组织有问题，所以不推荐在模块中还是用命名空间，这样反而会增加代码的复杂性和降低代码的可读性，具体参看: [模块和命名空间](https://www.tslang.cn/docs/handbook/namespaces-and-modules.html)。
 
+  - 模块解析
+    - 阐述了 TS 两种模块解析方式：classic、nodejs（默认） 的方式的模块解析规则，参看：[模块解析](https://www.tslang.cn/docs/handbook/module-resolution.html)
+
+  - test12.ts - 模块合并
+
 
