@@ -9,7 +9,7 @@
 // import './demo09'
 // import './demo10'
 // import './demo11'
-import './demo12'
+// import './demo12'
 // import './demo13'
 // import './demo15'
 // import './router-demo/demo03'
@@ -17,3 +17,5 @@ import './demo12'
 // import './router-demo/demo05'
 // import { run } from './redux-demo'
 // run()
+
+import './redux/demo01';
