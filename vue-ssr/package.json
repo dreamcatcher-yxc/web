@@ -9,7 +9,7 @@
   "author": "xiuchu.yang",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.0",
+    "express": "^4.17.3",
     "vue": "^2.6.10",
     "vue-server-renderer": "^2.6.10"
   }
